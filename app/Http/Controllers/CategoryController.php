@@ -14,7 +14,8 @@ class CategoryController extends Controller
      */
     public function index()
     {
-        return view('partials.category.create');
+        $categories = Category::all();
+        return view('partials.category.index', compact('categories'));
     }
 
     /**
@@ -24,7 +25,7 @@ class CategoryController extends Controller
      */
     public function create()
     {
-        //
+        return view('partials.category.create');
     }
 
     /**
@@ -37,11 +38,11 @@ class CategoryController extends Controller
     {
         // dd($request->category);
         $request->validate([
-            'category' => 'required',
+            'title' => 'required',
         ]);
 
         $category = new Category();
-        $category->title = $request['category'];
+        $category->title = $request['title'];
         $category->save();
 
         return back();
@@ -66,7 +67,7 @@ class CategoryController extends Controller
      */
     public function edit(Category $category)
     {
-        //
+        return view('partials.category.edit', compact('category'));
     }
 
     /**
@@ -78,7 +79,12 @@ class CategoryController extends Controller
      */
     public function update(Request $request, Category $category)
     {
-        //
+        $request->validate([
+            'title' => 'required'
+        ]);
+        $category = Category::findOrFail($category->id);
+        $category->update($request->all());
+        return redirect('/category');
     }
 
     /**
@@ -89,6 +95,7 @@ class CategoryController extends Controller
      */
     public function destroy(Category $category)
     {
-        //
+        $post_delete = Category::find($category->id)->delete();
+        return redirect('/category')->with('errors', 'post delete');
     }
 }

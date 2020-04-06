@@ -7,9 +7,11 @@
     <title>Document</title>
 </head>
 <body>
-    <form action="{{route('category.store')}}" method="POST">
-        @csrf 
-        Add Category:<input type="text" name="title" id="title" />
+    <form action="{{route('category.update',$category->id)}}" method="POST">
+         
+        @csrf
+        @method('PUT')   
+        Edit Category:<input type="text" name="title" id="title" value={{$category->title}} />
 
         <input type="submit" value="Save">
     </form>
