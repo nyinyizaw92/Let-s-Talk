@@ -1,0 +1,160 @@
+body {
+    width: 100%;
+    margin: 0 auto;
+}
+
+#app {
+    nav {
+        // background: rgba(0, 163, 255, 0.63);
+        // background: radial-gradient(
+        //     ellipse farthest-corner at bottom left,
+        //     rgba(0, 163, 255, 0.63) 0%,
+        //     rgba(0, 255, 255, 0.25) 80%
+        // );
+        // background: -webkit-radial-gradient(
+        //     ellipse farthest-corner at bottom left,
+        //     rgba(0, 163, 255, 0.63) 0%,
+        //     rgba(0, 255, 255, 0.25) 80%
+        // );
+        // background: -moz-radial-gradient(
+        //     ellipse farthest-corner at bottom left,
+        //     rgba(0, 163, 255, 0.63) 0%,
+        //     rgba(0, 255, 255, 0.25) 80%
+        // );
+        background: rgba(144, 144, 209, 0.57);
+        background: radial-gradient(
+            circle farthest-side at bottom right,
+            rgba(144, 144, 209, 0.57) 0%,
+            #1da5cc 80%
+        );
+        background: -webkit-radial-gradient(
+            circle farthest-side at bottom right,
+            rgba(144, 144, 209, 0.57) 0%,
+            #1da5cc 80%
+        );
+        background: -moz-radial-gradient(
+            circle farthest-side at bottom right,
+            rgba(144, 144, 209, 0.57) 0%,
+            #1da5cc 80%
+        );
+
+        .container {
+            display: grid;
+            grid-template-columns: 25% 50% 25%;
+
+            a {
+                text-decoration: none;
+                color: white;
+                margin: 1rem 0rem 1rem 3rem;
+            }
+
+            .search {
+                text-align: right;
+                input {
+                    padding-top: 0.5rem;
+                    font-size: 18px;
+                    border-width: 0px;
+                    border-bottom-width: 2px;
+                    border-color: #ffffff;
+                    background-color: rgba(96, 135, 144, 0);
+                    color: #ffffff;
+                    border-style: solid;
+                    border-radius: 0px;
+                    box-shadow: -1px 0px 0px rgba(255, 255, 255, 0.1);
+                    text-shadow: 0px 0px 5px rgba(66, 66, 66, 0.75);
+                    &:focus {
+                        outline: none;
+                        padding-top: 1rem;
+                    }
+                }
+
+                p {
+                    color: white;
+                    position: relative;
+                    float: right;
+                    font-size: 15px;
+                    padding: 2px;
+                }
+            }
+
+            .nav-login {
+                ul {
+                    margin: 0 auto;
+                    display: flex;
+                    justify-content: flex-end;
+                    padding: 1rem 2rem 0rem 0rem;
+                    list-style: none;
+
+                    li {
+                        margin-right: 2rem;
+
+                        a {
+                            text-decoration: none;
+                            color: white;
+                        }
+
+                        .user-profile {
+                            display: flex;
+                            margin-top: -1rem;
+
+                            a {
+                                margin: 0 auto;
+                                padding-top: 1rem;
+                            }
+
+                            .drop-down {
+                                padding-top: 0.9rem;
+                                cursor: move;
+                            }
+
+                            .down > img {
+                                width: 25px;
+                                height: 25px;
+                            }
+
+                            .up {
+                                position: absolute;
+                                padding-left: 8.4rem;
+                                padding-top: 17px;
+                                display: none;
+                                img {
+                                    width: 20px;
+                                    height: 20px;
+                                }
+                            }
+                        }
+
+                        .user-logout {
+                            position: absolute;
+                            background: #5e858657;
+                            width: 100px;
+                            height: 30px;
+                            text-align: center;
+                            padding-top: 8px;
+                            margin-top: 1px;
+                            margin-left: 3.5rem;
+                            a {
+                                margin: 0 auto;
+                            }
+                            //display: none;
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    .second-nav > .nav-list {
+        ul {
+            list-style: none;
+            padding-left: 3rem;
+            display: inline-flex;
+            justify-content: space-around;
+            li > a {
+                text-decoration: none;
+                color: #948b8b;
+                padding-right: 2rem;
+            }
+        }
+    }
+}

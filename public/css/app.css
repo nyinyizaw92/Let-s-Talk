@@ -1,0 +1,301 @@
+@import url(https://fonts.googleapis.com/css?family=Nunito);body {
+  width: 100%;
+  margin: 0 auto;
+}
+
+#app nav {
+  background: rgba(144, 144, 209, 0.57);
+  background: radial-gradient(circle farthest-side at bottom right, rgba(144, 144, 209, 0.57) 0%, #1da5cc 80%);
+  background: -moz-radial-gradient(circle farthest-side at bottom right, rgba(144, 144, 209, 0.57) 0%, #1da5cc 80%);
+}
+
+#app nav .container {
+  display: grid;
+  grid-template-columns: 25% 50% 25%;
+}
+
+#app nav .container a {
+  text-decoration: none;
+  color: white;
+  margin: 1rem 0rem 1rem 3rem;
+}
+
+#app nav .container .search {
+  text-align: right;
+}
+
+#app nav .container .search input {
+  padding-top: 0.5rem;
+  font-size: 18px;
+  border-width: 0px;
+  border-bottom-width: 2px;
+  border-color: #ffffff;
+  background-color: rgba(96, 135, 144, 0);
+  color: #ffffff;
+  border-style: solid;
+  border-radius: 0px;
+  box-shadow: -1px 0px 0px rgba(255, 255, 255, 0.1);
+  text-shadow: 0px 0px 5px rgba(66, 66, 66, 0.75);
+}
+
+#app nav .container .search input:focus {
+  outline: none;
+  padding-top: 1rem;
+}
+
+#app nav .container .search p {
+  color: white;
+  position: relative;
+  float: right;
+  font-size: 15px;
+  padding: 2px;
+}
+
+#app nav .container .nav-login ul {
+  margin: 0 auto;
+  display: flex;
+  justify-content: flex-end;
+  padding: 1rem 2rem 0rem 0rem;
+  list-style: none;
+}
+
+#app nav .container .nav-login ul li {
+  margin-right: 2rem;
+}
+
+#app nav .container .nav-login ul li a {
+  text-decoration: none;
+  color: white;
+}
+
+#app nav .container .nav-login ul li .user-profile {
+  display: flex;
+  margin-top: -1rem;
+}
+
+#app nav .container .nav-login ul li .user-profile a {
+  margin: 0 auto;
+  padding-top: 1rem;
+}
+
+#app nav .container .nav-login ul li .user-profile .drop-down {
+  padding-top: 0.9rem;
+  cursor: move;
+}
+
+#app nav .container .nav-login ul li .user-profile .down > img {
+  width: 25px;
+  height: 25px;
+}
+
+#app nav .container .nav-login ul li .user-profile .up {
+  position: absolute;
+  padding-left: 8.4rem;
+  padding-top: 17px;
+  display: none;
+}
+
+#app nav .container .nav-login ul li .user-profile .up img {
+  width: 20px;
+  height: 20px;
+}
+
+#app nav .container .nav-login ul li .user-logout {
+  position: absolute;
+  background: #5e858657;
+  width: 100px;
+  height: 30px;
+  text-align: center;
+  padding-top: 8px;
+  margin-top: 1px;
+  margin-left: 3.5rem;
+}
+
+#app nav .container .nav-login ul li .user-logout a {
+  margin: 0 auto;
+}
+
+#app .second-nav > .nav-list ul {
+  list-style: none;
+  padding-left: 3rem;
+  display: inline-flex;
+  justify-content: space-around;
+}
+
+#app .second-nav > .nav-list ul li > a {
+  text-decoration: none;
+  color: #948b8b;
+  padding-right: 2rem;
+}
+
+.latest-post {
+  background: #5e85863b;
+  display: grid;
+  grid-template-columns: 70% 30%;
+  justify-content: center;
+}
+
+.latest-post .latest {
+  margin: 3rem 1rem 3rem 3rem;
+}
+
+.latest-post .latest .post {
+  background: white;
+  margin-bottom: 3px;
+  padding: 1rem;
+  display: flex;
+  flex-direction: row;
+}
+
+.latest-post .latest .post .post-list {
+  margin-left: 1rem;
+}
+
+.latest-post .latest .post .post-list a {
+  text-decoration: none;
+}
+
+.latest-post .latest .post .post-list .post-header {
+  cursor: move;
+}
+
+.latest-post .latest .post .post-list .post-header p,
+.latest-post .latest .post .post-list .post-header h3 {
+  margin: 0;
+}
+
+.latest-post .latest .post .post-list .post-body {
+  width: 50vw;
+  display: grid;
+  grid-template-columns: 60% 40%;
+  margin-top: 5px;
+}
+
+.latest-post .latest .post .post-list .post-body .comment-vote {
+  display: flex;
+  flex-wrap: nowrap;
+}
+
+.latest-post .latest .post .post-list .post-body .comment-vote .comment,
+.latest-post .latest .post .post-list .post-body .comment-vote .vote {
+  width: 50%;
+}
+
+.latest-post .latest .post .post-list .post-body .comment-vote .comment img,
+.latest-post .latest .post .post-list .post-body .comment-vote .vote img {
+  position: absolute;
+}
+
+.latest-post .latest .post .post-list .post-body .comment-vote .comment span,
+.latest-post .latest .post .post-list .post-body .comment-vote .vote span {
+  margin-left: 2rem;
+}
+
+.latest-post .latest .post .post-list .post-body .edit-delete {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+}
+
+.latest-post .latest .post .post-list .post-body .edit-delete .edit {
+  margin-right: 1rem;
+  border: 1px solid #ccc;
+  width: 54px;
+  text-align: center;
+  height: 21px;
+  border-radius: 5px;
+}
+
+.latest-post .latest .post .post-list .post-body .edit-delete .delete > form input {
+  margin-right: 1rem;
+  background: white;
+  color: red;
+  border-radius: 5px;
+}
+
+.latest-post .user-info {
+  background: white;
+  margin: 3rem 3rem 3rem 1rem;
+}
+
+.post-detail {
+  background: #5e85863b;
+  display: grid;
+  grid-template-columns: 70% 30%;
+  justify-content: center;
+  height: 100vh;
+}
+
+.post-detail .post {
+  margin: 3rem 1rem 3rem 3rem;
+  height: -webkit-max-content;
+  height: -moz-max-content;
+  height: max-content;
+  background: white;
+  margin-bottom: 3px;
+  padding: 1rem;
+  display: flex;
+  flex-direction: row;
+}
+
+.post-detail .post .post-list {
+  margin-left: 1rem;
+}
+
+.post-detail .post .post-list a {
+  text-decoration: none;
+}
+
+.post-detail .post .post-list .post-header {
+  cursor: move;
+}
+
+.post-detail .post .post-list .post-header p,
+.post-detail .post .post-list .post-header h3 {
+  margin: 0;
+}
+
+.post-detail .post .post-list .post-header .post-img {
+  width: 500px;
+  height: 300px;
+  position: relative;
+}
+
+.post-detail .post .post-list .post-header .post-img img {
+  margin: 0 auto;
+  width: 100%;
+  height: 100%;
+}
+
+.post-detail .post .post-list .post-body {
+  width: 50vw;
+  display: grid;
+  grid-template-columns: 60% 40%;
+  margin-top: 5px;
+}
+
+.post-detail .post .post-list .post-body .comment-vote {
+  display: flex;
+  flex-wrap: nowrap;
+}
+
+.post-detail .post .post-list .post-body .comment-vote .comment,
+.post-detail .post .post-list .post-body .comment-vote .vote {
+  width: 50%;
+}
+
+.post-detail .post .post-list .post-body .comment-vote .comment img,
+.post-detail .post .post-list .post-body .comment-vote .vote img {
+  position: absolute;
+}
+
+.post-detail .post .post-list .post-body .comment-vote .comment span,
+.post-detail .post .post-list .post-body .comment-vote .vote span {
+  margin-left: 2rem;
+}
+
+.post-detail .user-info {
+  background: white;
+  margin: 3rem 3rem 3rem 1rem;
+}
+
