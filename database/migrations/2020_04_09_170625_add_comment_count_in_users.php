@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class ChangePostsImageColumnType extends Migration
+class AddCommentCountInUsers extends Migration
 {
     /**
      * Run the migrations.
@@ -13,8 +13,8 @@ class ChangePostsImageColumnType extends Migration
      */
     public function up()
     {
-        Schema::table('posts', function (Blueprint $table) {
-            $table->string('image')->nullable()->change();
+        Schema::table('users', function (Blueprint $table) {
+            $table->integer('comment_count')->default('0');
         });
     }
 
@@ -25,8 +25,8 @@ class ChangePostsImageColumnType extends Migration
      */
     public function down()
     {
-        Schema::table('posts', function (Blueprint $table) {
-            $table->dropColumn('image');
+        Schema::table('users', function (Blueprint $table) {
+            $table->dropColumn('comment_count')->default('0');
         });
     }
 }

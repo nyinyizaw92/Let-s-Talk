@@ -4,8 +4,10 @@ namespace App\Http\Controllers;
 
 use App\Post;
 use App\Category;
+use App\Comment;
 use Illuminate\Http\Request;
 use App\Http\Requests\PostSaveRequest;
+use App\UserLikePost;
 use Illuminate\Support\Facades\Auth;
 
 
@@ -19,6 +21,8 @@ class PostController extends Controller
     public function index()
     {
         $posts = Post::all();
+
+
         return view('partials.post.index', compact('posts'));
     }
 
@@ -56,12 +60,13 @@ class PostController extends Controller
             if ($image->move($target_path, $files)) {
 
                 $post_create->image = $files;
+                $post_create->save();
             }
         } else {
             $post_create->create($request->all());
         }
 
-        $post_create->save();
+
         return redirect('/')->with('success', 'post save');
     }
 
@@ -74,7 +79,9 @@ class PostController extends Controller
     public function show($id)
     {
         $post_detail = Post::find($id);
-        return view('partials.post.show', compact('post_detail'));
+        $comments = Comment::where('post_id', $id)->with('user')->get();
+
+        return view('partials.post.show', compact(['post_detail', 'comments']));
     }
 
     /**
@@ -124,6 +131,12 @@ class PostController extends Controller
      */
     public function destroy(Post $post)
     {
+        $post_id = $post->id;
+        if (is_array($post_id) || is_object($post_id)) {
+            foreach ($post_id as $id) {
+                $comment = Comment::where('post_id', $id)->delete();
+            }
+        }
         $post_delete = Post::find($post->id)->delete();
         return redirect('/')->with('errors', 'post delete');
     }

@@ -61,7 +61,7 @@
                                     @else
 
                                     @endif
-                                    <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+                                    <a id="navbarDropdown" class="nav-link dropdown-toggle" href="{{route('user.index')}}">
                                         {{ Auth::user()->name }} <span class="caret"></span>
                                     </a>
                                     <div class="drop-down down">

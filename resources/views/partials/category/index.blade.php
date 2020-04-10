@@ -18,13 +18,13 @@
             <div class="edit">
                 <a href="{{ URL::to('category/' . $category->id . '/edit')}}">Edit</a>
             </div>
-            <div class="delete">
+            {{-- <div class="delete">
                 <form action="{{URL::to('category/'.$category->id)}}" method="POST">
                 @method('DELETE')
                 @csrf
                 <input type="submit" value="Delete">
             </form>
-            </div>
+            </div> --}}
         @endforeach
    </ul>
    @endif

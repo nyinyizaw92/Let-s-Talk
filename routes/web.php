@@ -19,11 +19,14 @@ use Illuminate\Support\Facades\Route;
 
 Auth::routes();
 
+Route::resource('/user', 'UserController')->middleware('auth');
+Route::resource('/post-like', 'UserLikePostController')->middleware('auth');
+
 Route::get('/', 'LatestPostController@index');
 // Route::get('/post/{id}', 'PostController@show');
 Route::resource('/post', 'PostController')->middleware('auth')->except('show');
 Route::get('/post/show/{id}', 'PostController@show')->name('show');
 
-
 Route::resource('/category', 'CategoryController')->middleware('auth');
+Route::resource('/comment', 'CommentController')->middleware('auth');
 // Route::get('/latest-post', 'LatestPostController@index')->name('latest-post');

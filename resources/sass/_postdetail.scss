@@ -17,6 +17,7 @@
 
         .post-list {
             margin-left: 1rem;
+            width: 37rem;
             a {
                 text-decoration: none;
             }
@@ -25,6 +26,13 @@
                 p,
                 h3 {
                     margin: 0;
+
+                    span {
+                        font-size: 11px;
+                        background: #c1c1c1;
+                        padding: 1px;
+                        border-radius: 3px;
+                    }
                 }
 
                 .post-img {
@@ -59,6 +67,83 @@
 
                         span {
                             margin-left: 2rem;
+                        }
+                    }
+                }
+            }
+
+            .post-comment {
+                margin-top: 10px;
+                form {
+                    border: 2px solid #dcdbdb;
+                    width: 23rem;
+                    border-radius: 5px;
+                    height: 2rem;
+
+                    textarea {
+                        resize: none;
+                        height: 26px;
+                        border: 0;
+                        padding: 5px 0px 0px 6px;
+                        width: 18rem;
+                    }
+
+                    label {
+                        img {
+                            position: absolute;
+                            width: 29px;
+                            margin-top: 2px;
+                            z-index: 1;
+                        }
+
+                        input[type="file"] {
+                            position: absolute;
+                            z-index: 2;
+                            width: 25px;
+                            height: 33px;
+                            opacity: 0;
+                        }
+                    }
+
+                    input[type="submit"] {
+                        position: absolute;
+                        margin-left: 32px;
+                        margin-top: 2px;
+                        border: 0px;
+                        background-color: white;
+                        background-image: url(/icons/icons8-email-send-50.png);
+                        width: 30px;
+                        height: 30px;
+                        background-repeat: no-repeat;
+                        background-size: cover;
+                    }
+                }
+            }
+
+            .answer-comment {
+                margin-top: 10px;
+
+                .answer {
+                    padding: 1rem;
+                    border-bottom: 1px solid #ece0e0;
+                    .comment-user {
+                        img {
+                            width: 30px;
+                            height: 30px;
+                        }
+
+                        span {
+                            font-size: 15px;
+                            position: absolute;
+                            margin: 4px;
+                        }
+                    }
+
+                    .comment-answer {
+                        padding-left: 2.2rem;
+                        p {
+                            margin: 0;
+                            font-size: 14px;
                         }
                     }
                 }
