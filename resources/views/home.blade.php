@@ -35,7 +35,7 @@
                     @if($post->user->profile == null)
                     <img src="/icons/icons8-male-user-50.png" alt="profile">
                     @else 
-                        <img src="/icons/{{$post->user->profile}}" alt="profile">
+                        <img src="/profile/{{$post->user->profile}}" alt="profile">
                     @endif
                 </div>
                 <div class="post-list">
@@ -54,17 +54,22 @@
                                 <span>{{$post->comment_count}}</span>
                             </div>
                             <div class="vote">
-                              
-                                @if($likes !== null)
-                                
-                                    @foreach ($likes as $like)
-                                        @if($like->post_id == $post->id && $like->user_id == Auth::user()->id)
-                                            <img src="/icons/icons8-heart-outline-24-blue.png" alt="vote">        
-                                        @else
-                                            <img src="/icons/icons8-heart-outline-24.png" alt="vote">
-                                        @endif
-                                    @endforeach
-                                  
+                            
+                                @if(Auth::check())
+                                    @if(count($post->userlike) == 0)
+                                        <img src="/icons/icons8-heart-outline-24.png" alt="vote">     
+                                    @else
+                                        @foreach($post->userlike as $like)
+                                            @if($like->user_id == Auth::user()->id) 
+                                                <img src="/icons/icons8-heart-outline-24-blue.png" alt="vote"
+                                                style="z-index:1">  
+                                            @else  
+                                                <img src="/icons/icons8-heart-outline-24.png" alt="vote">  
+                                            @endif  
+                                        @endforeach
+                                         
+                                    @endif
+
                                     <form action="{{route('post-like.store')}}" method="POST"
                                     >
                                     @csrf
@@ -73,10 +78,62 @@
                                     <input type="submit" value="">
                                     </form>
                                     <span>{{$post->like_count}}</span>
-                                @else
-                                <img src="/icons/icons8-heart-outline-24.png" alt="vote">
-                                <span>{{$post->like_count}}</span>
+                                @else  
+                                    <form action="{{route('post-like.store')}}" method="POST"
+                                    >
+                                    @csrf
+                                    <input type="hidden" name="user_id" @if(Auth::check()) value="{{Auth::user()->id}}" @endif />
+                                    <input type="hidden" name="post_id" value="{{$post->id}}" />
+                                    <input type="submit" value="">
+                                    </form>
+                                    <img src="/icons/icons8-heart-outline-24.png" alt="vote">
+                                    <span>{{$post->like_count}}</span>
                                 @endif
+{{--                                 
+                               @if(Auth::check() && $post->user->userlike !== null)
+                                    @php
+                                        dd($post->user->name);
+                                    @endphp
+                               @endif --}}
+                                {{-- @if($likes !== null)
+                                    @foreach ($likes as $like)
+                                        @if(count($like) !== 0 && $like[0]->post_id == $post->id && $like[0]->user_id == Auth::user()->id)
+                                            <img src="/icons/icons8-heart-outline-24-blue.png" alt="vote">        
+                                        @else
+                                            <img src="/icons/icons8-heart-outline-24.png" alt="vote">
+                                        @endif
+                                    @endforeach
+                                    <form action="{{route('post-like.store')}}" method="POST"
+                                    >
+                                    @csrf
+                                    <input type="hidden" name="user_id" @if(Auth::check()) value="{{Auth::user()->id}}" @endif />
+                                    <input type="hidden" name="post_id" value="{{$post->id}}" />
+                                    <input type="submit" value="">
+                                    </form>
+                                    <img src="/icons/icons8-heart-outline-24.png" alt="vote">    
+                                    <span>{{$post->like_count}}</span>
+                                @else --}}
+                                {{-- @if(Auth::check() && count($post->userlike) >0)
+                                        @foreach($post->userlike as $userlike)
+                                            @if($userlike->user_id == Auth::user()->id)
+                                                <img src="/icons/icons8-heart-outline-24-blue.png" alt="vote">
+                                            @else 
+                                            <img src="/icons/icons8-heart-outline-24.png" alt="vote"> 
+                                            @endif
+                                            
+                                        @endforeach
+                                        <form action="{{route('post-like.store')}}" method="POST"
+                                        >
+                                        @csrf
+                                        <input type="hidden" name="user_id" @if(Auth::check()) value="{{Auth::user()->id}}" @endif />
+                                        <input type="hidden" name="post_id" value="{{$post->id}}" />
+                                        <input type="submit" value="">
+                                        </form>
+                                        
+                                        <span>{{$post->like_count}}</span>
+                                @else  --}}
+                                
+                                {{-- @endif --}}
                                 
                               
                               
@@ -171,7 +228,7 @@
                         @if($top_user->profile == null)
                         <img src="/icons/icons8-male-user-50.png" alt="profile">
                         @else 
-                            <img src="/icons/{{$top_user->profile}}" alt="profile">
+                            <img src="/profile/{{$top_user->profile}}" alt="profile">
                         @endif
                     </div>
                     <div class="post-list">

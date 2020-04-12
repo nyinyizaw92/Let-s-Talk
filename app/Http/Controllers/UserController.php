@@ -2,7 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Post;
+use App\UserLikePost;
+use App\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class UserController extends Controller
 {
@@ -13,7 +17,12 @@ class UserController extends Controller
      */
     public function index()
     {
-        return view('partials.user.index');
+        $user = Auth::user();
+        $user_posts = Post::where('user_id', $user->id)->with(['category', 'comment', 'userlike'])->get();
+        $user_like_posts = UserLikePost::where('user_id', $user->id)
+            ->with(['post'])->get();
+
+        return view('partials.user.index', compact(['user', 'user_posts', 'user_like_posts']));
     }
 
     /**
@@ -68,7 +77,20 @@ class UserController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $update_user = User::findOrFail($id);
+        $image = $request->file('user_profile');
+        $update_user->name = $request['user_name'];
+        $update_user->email = $request['user_email'];
+
+        if ($image) {
+            $target_path = public_path('/profile/');
+            $files =  date('YmdHis') . "." . $image->getClientOriginalExtension();
+            if ($image->move($target_path, $files)) {
+                $update_user->profile = $files;
+            }
+        }
+        $update_user->save();
+        return redirect('/user')->with('success', 'post save');
     }
 
     /**

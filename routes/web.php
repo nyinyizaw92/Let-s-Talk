@@ -24,7 +24,8 @@ Route::resource('/post-like', 'UserLikePostController')->middleware('auth');
 
 Route::get('/', 'LatestPostController@index');
 // Route::get('/post/{id}', 'PostController@show');
-Route::resource('/post', 'PostController')->middleware('auth')->except('show');
+Route::resource('/post', 'PostController')->middleware('auth')->except(['show', 'index']);
+Route::get('/post/index', 'PostController@index')->name('index');
 Route::get('/post/show/{id}', 'PostController@show')->name('show');
 
 Route::resource('/category', 'CategoryController')->middleware('auth');

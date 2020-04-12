@@ -15,6 +15,17 @@
             display: flex;
             flex-direction: row;
 
+            .user-profile {
+                width: 50px;
+                height: 50px;
+
+                img {
+                    width: 100%;
+                    border: 1px solid gray;
+                    border-radius: 50%;
+                }
+            }
+
             .post-list {
                 margin-left: 1rem;
                 a {
@@ -44,17 +55,25 @@
                             img {
                                 position: absolute;
                                 cursor: move;
+                                z-index: 0;
                             }
 
                             span {
-                                margin-left: 2rem;
+                                float: right;
+                                position: relative;
+                                margin-right: 8.5rem;
                                 // cursor: move;
                             }
 
-                            form > input[type="submit"] {
-                                widows: 23px;
-                                opacity: 0;
-                                cursor: move;
+                            form {
+                                position: absolute;
+                                width: 25px;
+                                z-index: 1;
+                                input[type="submit"] {
+                                    width: 25px;
+                                    opacity: 0;
+                                    cursor: move;
+                                }
                             }
                         }
                     }
@@ -141,10 +160,11 @@
             flex-direction: column;
             height: 250px;
             overflow-y: hidden;
+            border-bottom: 1px solid #d9e2e3;
 
             .post-list {
                 margin-top: 5px;
-                margin-left: 5px;
+                background: #f9feff;
 
                 a {
                     text-decoration: none;
@@ -152,6 +172,7 @@
                 }
                 .post-header {
                     cursor: move;
+                    padding: 5px;
                     p,
                     h3 {
                         margin: 0;
@@ -161,8 +182,6 @@
         }
 
         .top-user {
-            // background: white;
-            // margin: 3rem 3rem 3rem 0;
             height: 297px;
             overflow-y: scroll;
 
@@ -177,9 +196,14 @@
                 flex-direction: row;
 
 
-                .user-profile > img {
-                    width: 35px;
-                    height: 35px;
+                .user-profile {
+                    width: 40px;
+                    height: 40px;
+                    img {
+                        width: 100%;
+                        border: 1px solid black;
+                        border-radius: 50%;
+                    }
                 }
 
                 .post-list {

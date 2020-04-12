@@ -2,7 +2,8 @@
 
 @section('content')
 <div class="login">
-    <div class="header">{{ __('Login') }}</div>
+    <div class="login-form">
+        <div class="header">{{ __('Login') }}</div>
 
     <div class="body">
         <form method="POST" action="{{ route('login') }}">
@@ -62,6 +63,7 @@
                 </div>
             </div>
         </form>
+    </div>
     </div>
 </div>
 {{-- <div class="container">

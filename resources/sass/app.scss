@@ -5,8 +5,11 @@
 @import "variables";
 
 // Bootstrap
-//@import "~bootstrap/scss/bootstrap";
+// @import "~bootstrap/scss/bootstrap";
 @import "login";
+@import "register";
 @import "navbar";
 @import "post";
 @import "postdetail";
+@import "postedit";
+@import "userprofile";

@@ -136,6 +136,10 @@ class PostController extends Controller
             foreach ($post_id as $id) {
                 $comment = Comment::where('post_id', $id)->delete();
             }
+
+            foreach ($post_id as $id) {
+                $like = UserLikePost::where('post_id', $id)->delete();
+            }
         }
         $post_delete = Post::find($post->id)->delete();
         return redirect('/')->with('errors', 'post delete');

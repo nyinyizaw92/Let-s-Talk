@@ -1,0 +1,313 @@
+.login-user {
+    background: #5e85863b;
+    height: 100vh;
+    width: 100vw;
+
+    nav {
+        background: rgba(144, 144, 209, 0.57);
+        background: radial-gradient(circle farthest-side at bottom right, rgba(144, 144, 209, 0.57) 0%, #1da5cc 80%);
+        background: -webkit-radial-gradient(circle farthest-side at bottom right, rgba(144, 144, 209, 0.57) 0%, #1da5cc 80%);
+        background: -moz-radial-gradient(circle farthest-side at bottom right, rgba(144, 144, 209, 0.57) 0%, #1da5cc 80%);
+
+        .container {
+            display: grid;
+            grid-template-columns: 60% 40%;
+
+            a {
+                text-decoration: none;
+                color: white;
+                margin: 1rem 0 1rem 3rem;
+            }
+            .nav-login {
+                ul {
+                    margin: 0 auto;
+                    display: flex;
+                    justify-content: flex-end;
+                    padding: 1rem 2rem 0 0;
+                    list-style: none;
+
+                    li {
+
+                        a {
+                            text-decoration: none;
+                            color: white;
+                        }
+
+                    }
+                }
+            }
+        }
+    }
+
+
+    h2 {
+        color: white;
+        margin: 5px 0 5px 15px;
+    }
+    .profile {
+        display: flex;
+        margin: 5px 5px 0;
+        background-color: white;
+        .image {
+            width: 100px;
+            height: 100px;
+            margin: 10px;
+            img {
+                width: 100%;
+                border: 2px solid #9e9191;
+                border-radius: 50%;
+
+            };
+        }
+
+        .name {
+            padding: 20px;
+            p {
+                margin: 0;
+                font-size: 20px;
+                span {
+                    font-size: 15px;
+                    font-style: italic;
+                    color: #776868;
+                }
+            }
+        }
+
+        .total-post {
+            padding: 25px;
+            p {
+                margin: 0;
+                span {
+                    color: #776868;
+                }
+            }
+        }
+        button {
+            border-radius: 5px;
+            background: white;
+            color: slategrey;
+            padding: 3px;
+            width: 80px;
+            &:focus {
+                background: white;
+                border: 0;
+            }
+        }
+    }
+
+    .update-form {
+        background: black;
+        z-index: 1;
+        position: fixed;
+        width: 100%;
+        height: 100%;
+        left: 0;
+        top: 0;
+        background-color: rgba(0, 0, 0, 0.4);
+        display: none;
+
+        .modal-content {
+            position: relative;
+            background-color: #fefefe;
+            margin: 10% auto auto;
+            padding: 0;
+            border: 1px solid #888;
+            width: 40%;
+            box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+            animation-name: animatetop;
+            animation-duration: 0.4s;
+
+            @keyframes animatetop {
+                from {
+                    top: -300px;
+                    opacity: 0
+                }
+                to {
+                    top: 0;
+                    opacity: 1
+                }
+            }
+            .modal-header {
+                padding: 2px 16px;
+                background-color: #5cb85c;
+                color: white;
+                h3 {
+                    margin: 0;
+                }
+
+                .close {
+                    color: white;
+                    float: right;
+                    font-size: 20px;
+                    font-weight: bold;
+
+                    &:hover,
+                    &:focus {
+                        color: #000;
+                        text-decoration: none;
+                        cursor: pointer;
+                    }
+                }
+
+            }
+
+            .modal-body {
+                form {
+                    width: 50%;
+                    margin: 25px auto auto;
+
+                    input[type="text"] {
+                        border: 0;
+                        border-bottom: 1px solid gray;
+                        padding: 3px;
+
+                        &:focus,
+                        &:hover {
+                            outline: none;
+                            border-bottom: 1px solid green;
+                        }
+                    }
+
+                    input[type="email"] {
+                        border: 0;
+                        border-bottom: 1px solid gray;
+                        padding: 3px;
+
+                        &:focus,
+                        &:hover {
+                            outline: none;
+                            border-bottom: 1px solid green;
+                        }
+                    }
+
+                    .user-image {
+                        width: 50%;
+                        top: 0;
+                        left: 0;
+                        img {
+                            width: 100%;
+                        }
+                    }
+                }
+            }
+        }
+    }
+    .about-user {
+        margin: 5px;
+        display: grid;
+        grid-template-columns: 70% 30%;
+
+        .user-post {
+            background: white;
+            margin-right: 5px;
+            height: max-content;
+            h3 {
+                margin: 1rem 0 0 1rem;
+            }
+
+            .created-post {
+                display: grid;
+                grid-template-columns: 80% 20%;
+                // background: #d5dcdc;
+                padding: 0.5rem 0.5rem 0.5rem 0;
+                border-bottom: 2px solid #b19fb1;
+
+                .left {
+                    margin-left: 1rem;
+                    a {
+                        text-decoration: none;
+                        h4 {
+                            margin: 0;
+
+                            span {
+                                background: #c3bcbc;
+                                font-size: 11px;
+                                padding: 1px;
+                                color: black;
+                            }
+                        }
+
+                        p {
+                            margin: 0;
+                        }
+                    }
+                }
+
+                .right {
+                    display: flex;
+                    flex-direction: column;
+                    .edit {
+                        width: 50px;
+                        text-align: center;
+                        border-radius: 5px;
+                        margin-right: 5px;
+                        background: #60caff;
+                        align-self: flex-end;
+                        a {
+                            text-decoration: none;
+                            color: white;
+                            font-size: 12px;
+                        }
+                    }
+
+                    .delete {
+                        width: 50px;
+                        text-align: center;
+                        background: red;
+                        border-radius: 5px;
+                        margin-top: 5px;
+                        margin-right: 5px;
+                        align-self: flex-end;
+
+                        form > input[type="submit"] {
+                            border: 0;
+                            font-size: 11px;
+                            color: white;
+                            background: red;
+                        }
+                    }
+                }
+            }
+        }
+
+        .your-save-post {
+            background: white;
+
+            h3 {
+                margin: 0 0 0 0.5rem;
+            }
+            .save-post {
+                padding: 0.5rem;
+                border-bottom: 1px solid black;
+                display: flex;
+                flex-direction: row;
+
+                .user-profile {
+                    width: 35px;
+                    height: 35px;
+                    img {
+                        width: 100%;
+                    }
+                }
+
+                .post-list {
+                    margin-left: 0.5rem;
+                    a {
+                        text-decoration: none;
+                        color: black;
+                        font-size: 12px;
+                    }
+                    .post-header {
+                        cursor: move;
+                        p,
+                        h3 {
+                            margin: 0;
+                        }
+                    }
+                }
+
+            }
+        }
+
+    }
+}

@@ -8,8 +8,10 @@
             @if($post_detail->user->profile == null)
             <img src="/icons/icons8-male-user-50.png" alt="profile">
             @else 
-                <img src="/icons/{{$post_detail->user->profile}}" alt="profile">
+                <img src="/profile/{{$post_detail->user->profile}}" alt="profile">
             @endif
+
+            <span>{{$post_detail->user->name}}</span>
         </div>
         <div class="post-list">
            

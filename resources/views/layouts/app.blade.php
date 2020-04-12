@@ -67,10 +67,7 @@
                                     <div class="drop-down down">
                                         <img class="down-arrow" src="/icons/icons8-expand-arrow-24.png" alt="drop-down">
                                     </div>
-                                    
-                                   <div class="drop-down up">
-                                        <img class="up-arrow" src="/icons/icons8-chevron-up-24.png" alt="drop-down">
-                                   </div>
+                                  
                                 </div>
                                 
 
@@ -102,21 +99,13 @@
     integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU="
     crossorigin="anonymous"></script>
 
-    {{-- <script>
+    <script>
        $(document).ready(function(){
-        $('.drop-down').mouseover(function(){
-            //alert('ok');
-            $('.up').css("display","block");
-            $('.down').css("display","none");
-            $('.user-logout').css("display","block");
-        });
-        $('.drop-down').mouseout(function(){
-             $('.down').css("display","block");
-             $('.up').css("display","none");
-             $('.user-logout').css("display","none");
+        $('.down-arrow').click(function(){
+            $('.user-logout').toggle();
         });
        })
-    </script> --}}
+    </script>
 
     @yield('scripts')
 </body>
