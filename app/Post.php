@@ -32,6 +32,8 @@ class Post extends Model
         return $this->hasMany(Comment::class);
     }
 
+
+
     public function userlike()
     {
         return $this->hasMany(UserLikePost::class);

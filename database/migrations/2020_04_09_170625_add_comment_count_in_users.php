@@ -26,7 +26,7 @@ class AddCommentCountInUsers extends Migration
     public function down()
     {
         Schema::table('users', function (Blueprint $table) {
-            $table->dropColumn('comment_count')->default('0');
+            $table->dropColumn('comment_count');
         });
     }
 }

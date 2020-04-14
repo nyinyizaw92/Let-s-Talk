@@ -89,72 +89,21 @@
                                     <img src="/icons/icons8-heart-outline-24.png" alt="vote">
                                     <span>{{$post->like_count}}</span>
                                 @endif
-{{--                                 
-                               @if(Auth::check() && $post->user->userlike !== null)
-                                    @php
-                                        dd($post->user->name);
-                                    @endphp
-                               @endif --}}
-                                {{-- @if($likes !== null)
-                                    @foreach ($likes as $like)
-                                        @if(count($like) !== 0 && $like[0]->post_id == $post->id && $like[0]->user_id == Auth::user()->id)
-                                            <img src="/icons/icons8-heart-outline-24-blue.png" alt="vote">        
-                                        @else
-                                            <img src="/icons/icons8-heart-outline-24.png" alt="vote">
-                                        @endif
-                                    @endforeach
-                                    <form action="{{route('post-like.store')}}" method="POST"
-                                    >
-                                    @csrf
-                                    <input type="hidden" name="user_id" @if(Auth::check()) value="{{Auth::user()->id}}" @endif />
-                                    <input type="hidden" name="post_id" value="{{$post->id}}" />
-                                    <input type="submit" value="">
-                                    </form>
-                                    <img src="/icons/icons8-heart-outline-24.png" alt="vote">    
-                                    <span>{{$post->like_count}}</span>
-                                @else --}}
-                                {{-- @if(Auth::check() && count($post->userlike) >0)
-                                        @foreach($post->userlike as $userlike)
-                                            @if($userlike->user_id == Auth::user()->id)
-                                                <img src="/icons/icons8-heart-outline-24-blue.png" alt="vote">
-                                            @else 
-                                            <img src="/icons/icons8-heart-outline-24.png" alt="vote"> 
-                                            @endif
-                                            
-                                        @endforeach
-                                        <form action="{{route('post-like.store')}}" method="POST"
-                                        >
-                                        @csrf
-                                        <input type="hidden" name="user_id" @if(Auth::check()) value="{{Auth::user()->id}}" @endif />
-                                        <input type="hidden" name="post_id" value="{{$post->id}}" />
-                                        <input type="submit" value="">
-                                        </form>
-                                        
-                                        <span>{{$post->like_count}}</span>
-                                @else  --}}
-                                
-                                {{-- @endif --}}
-                                
-                              
-                              
+
                             </div>
                         </div>
                         <div class="edit-delete">
-                            @if(Auth::check())
-                                @if($post->user->id == Auth::user()->id)
-                                  
-                                        <div class="edit">
-                                            <a href="{{ URL::to('post/' . $post->id . '/edit')}}">Edit</a>
-                                        </div>
-                                        <div class="delete">
-                                            <form action="{{URL::to('post/'.$post->id)}}" method="POST">
-                                            @method('DELETE')
-                                            @csrf
-                                            <input type="submit" value="Delete">
-                                        </form>
-                                        </div>
-                                  
-                                @endif
+                            @if(Auth::check() && $post->user_id == Auth::user()->id)
+                                <div class="edit">
+                                    <a href="{{ URL::to('post/' . $post->id . '/edit')}}">Edit</a>
+                                </div>
+                                <div class="delete">
+                                    <form action="{{URL::to('post/'.$post->id)}}" method="POST">
+                                    @method('DELETE')
+                                    @csrf
+                                    <input type="submit" value="Delete">
+                                </form>
+                                </div>
                             @endif
                         </div>
                     </div>

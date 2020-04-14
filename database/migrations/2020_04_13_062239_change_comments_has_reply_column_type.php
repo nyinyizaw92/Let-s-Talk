@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class ChangePostsImageColumnType extends Migration
+class ChangeCommentsHasReplyColumnType extends Migration
 {
     /**
      * Run the migrations.
@@ -13,8 +13,8 @@ class ChangePostsImageColumnType extends Migration
      */
     public function up()
     {
-        Schema::table('posts', function (Blueprint $table) {
-            $table->string('image')->nullable()->change();
+        Schema::table('comments', function (Blueprint $table) {
+            $table->integer('has_reply')->default('0')->change();
         });
     }
 
@@ -25,8 +25,9 @@ class ChangePostsImageColumnType extends Migration
      */
     public function down()
     {
-        Schema::table('posts', function (Blueprint $table) {
-            $table->string('image')->change();
+        Schema::table('comments', function (Blueprint $table) {
+
+            $table->boolean('has_reply')->default(false)->change();
         });
     }
 }

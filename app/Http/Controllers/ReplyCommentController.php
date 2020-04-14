@@ -2,13 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use App\ReplyComment;
 use App\Comment;
 use App\Post;
+use App\Http\Requests\ReplyCommentRequest;
 use Illuminate\Http\Request;
-use App\Http\Requests\CommentRequest;
-use App\ReplyComment;
 
-class CommentController extends Controller
+class ReplyCommentController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -36,33 +36,40 @@ class CommentController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(CommentRequest $request)
+    public function store(ReplyCommentRequest $request)
     {
+
+        $has_reply = Comment::findOrFail($request->comment_id);
+        $has_reply->has_reply = true;
+        $has_reply->update();
+
+        $post_comment = Post::findOrFail($request->post_id);
+        $post_comment->increment('comment_count');
+        $post_comment->update();
 
         $image = $request->file('image');
 
-        $comment = new Comment();
-        $comment->user_id = $request->user_id;
-        $comment->post_id = $request->post_id;
-        $comment->answer = $request->answer;
+        $reply_comment = new ReplyComment();
+        $reply_comment->user_id = $request->user_id;
+        $reply_comment->comment_id = $request->comment_id;
+        $reply_comment->answer = $request->answer;
 
         if ($image) {
             $target_path = public_path('/comments/');
             $files =  date('YmdHis') . "." . $image->getClientOriginalExtension();
             if ($image->move($target_path, $files)) {
 
-                $comment->image = $files;
-                $comment->save();
+                $reply_comment->image = $files;
+                // $reply_comment->save();
             }
-        } else {
-            $comment->create($request->all());
         }
 
-
-
-        $post_comment = Post::findOrFail($request->post_id);
-        $post_comment->increment('comment_count');
-        $post_comment->update();
+        $reply_comment->save();
+        // $replyComment = new ReplyComment();
+        // $replyComment->user_id = $request->user_id;
+        // $replyComment->comment_id = $request->comment_id;
+        // $replyComment->new_comment_id = $comment->id;
+        // $replyComment->save();
 
         return back();
     }
@@ -70,10 +77,10 @@ class CommentController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Comment  $comment
+     * @param  \App\ReplyComment  $replyComment
      * @return \Illuminate\Http\Response
      */
-    public function show(Comment $comment)
+    public function show(ReplyComment $replyComment)
     {
         //
     }
@@ -81,10 +88,10 @@ class CommentController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Comment  $comment
+     * @param  \App\ReplyComment  $replyComment
      * @return \Illuminate\Http\Response
      */
-    public function edit(Comment $comment)
+    public function edit(ReplyComment $replyComment)
     {
         //
     }
@@ -93,15 +100,14 @@ class CommentController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Comment  $comment
+     * @param  \App\ReplyComment  $replyComment
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Comment $comment)
+    public function update(Request $request, ReplyComment $replyComment)
     {
-        //dd($comment);
         $image = $request->file('image');
 
-        $update_comment = Comment::findOrFail($comment->id);
+        $update_comment = ReplyComment::findOrFail($replyComment->id);
         $update_comment->answer = $request->answer;
 
         if ($image) {
@@ -110,7 +116,7 @@ class CommentController extends Controller
             if ($image->move($target_path, $files)) {
 
                 $update_comment->image = $files;
-                //$comment->save();
+                // $comment->save();
             }
         }
 
@@ -122,34 +128,17 @@ class CommentController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Comment  $comment
+     * @param  \App\ReplyComment  $replyComment
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Comment $comment)
+    public function destroy(ReplyComment $replyComment)
     {
-        $comment = Comment::findOrFail($comment->id);
+        $comment = Comment::findOrFail($replyComment->comment_id);
+        $post_id = Post::findOrFail($comment->post_id);
+        $post_id->decrement('comment_count');
+        $post_id->update();
 
-        if ($comment->has_reply == 1) {
-            $reply_comment = ReplyComment::where('comment_id', $comment->id)->get();
-            foreach ($reply_comment as $rpl_cmt) {
-                $delete = $rpl_cmt->delete();
-
-                $post_id = Post::findOrFail($comment->post_id);
-                $post_id->decrement('comment_count');
-                $post_id->update();
-            }
-
-            $post_id = Post::findOrFail($comment->post_id);
-            $post_id->decrement('comment_count');
-            $post_id->update();
-            $delete_comment = $comment->delete();
-        } else {
-            $post_id = Post::findOrFail($comment->post_id);
-            $post_id->decrement('comment_count');
-            $post_id->update();
-            $delete_comment = $comment->delete();
-        }
-
+        $delete_rpl_cmt = ReplyComment::findOrFail($replyComment->id)->delete();
         return back();
     }
 }

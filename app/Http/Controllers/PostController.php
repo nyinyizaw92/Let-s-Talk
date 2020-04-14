@@ -81,6 +81,7 @@ class PostController extends Controller
         $post_detail = Post::find($id);
         $comments = Comment::where('post_id', $id)->with('user')->get();
 
+
         return view('partials.post.show', compact(['post_detail', 'comments']));
     }
 
