@@ -21,10 +21,11 @@ body {
             }
 
             .search {
-                text-align: right;
+                text-align: center;
                 input {
-                    padding-top: 0.5rem;
-                    font-size: 18px;
+                    width: 300px;
+                    margin-top: 2%;
+                    font-size: 12px;
                     border-width: 0;
                     border-bottom-width: 2px;
                     border-color: #ffffff;
@@ -32,21 +33,38 @@ body {
                     color: #ffffff;
                     border-style: solid;
                     border-radius: 0;
-                    box-shadow: -1px 0 0 rgba(255, 255, 255, 0.1);
-                    text-shadow: 0 0 5px rgba(66, 66, 66, 0.75);
-                    &:focus {
+                    // box-shadow: -1px 0 0 rgba(255, 255, 255, 0.1);
+                    // text-shadow: 0 0 5px rgba(66, 66, 66, 0.75);
+                    &:focus,
+                    &:active {
                         outline: none;
-                        padding-top: 1rem;
+                        padding-top: 2%;
                     }
                 }
 
-                p {
-                    color: white;
-                    position: relative;
-                    float: right;
-                    font-size: 15px;
-                    padding: 2px;
-                }
+                button {
+                    background-image: url('/icons/icons8-search-64.png');
+                    width: 30px;
+                    height: 30px;
+                    position: absolute;
+                    background-position: center;
+                    background-repeat: no-repeat;
+                    background-size: cover;
+                    background-color: #63b0d8;
+                    margin-top: 5px;
+                    border: 0;
+                    margin-left: 5px;
+                    cursor: move;
+
+                };
+
+                // p {
+                //     color: white;
+                //     position: relative;
+                //     float: right;
+                //     font-size: 15px;
+                //     padding: 2px;
+                // }
             }
 
             .nav-login {
@@ -68,6 +86,7 @@ body {
                         .user-profile {
                             display: flex;
                             margin-top: -1rem;
+                            margin-left: 9rem;
 
                             a {
                                 margin: 0 auto;
@@ -104,7 +123,7 @@ body {
                             text-align: center;
                             padding-top: 8px;
                             margin-top: 10px;
-                            margin-left: -0.5rem;
+                            margin-left: 9rem;
                             display: none;
                             a {
                                 margin: 0 auto;

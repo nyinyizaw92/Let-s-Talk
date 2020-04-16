@@ -7,7 +7,10 @@ use App\Category;
 use App\Comment;
 use Illuminate\Http\Request;
 use App\Http\Requests\PostSaveRequest;
+use App\Http\Resources\PostResource;
+use App\Http\Resources\PostResourceCollection;
 use App\UserLikePost;
+use Faker\Provider\ar_JO\Person;
 use Illuminate\Support\Facades\Auth;
 
 
@@ -20,9 +23,8 @@ class PostController extends Controller
      */
     public function index()
     {
-        $posts = Post::all();
-
-
+        $posts = Post::paginate(10);
+        // return new PostResourceCollection(Post::paginate(10));
         return view('partials.post.index', compact('posts'));
     }
 

@@ -22,6 +22,7 @@
     </div>
 </div> --}}
 @include('partials.navbar.secondnav')
+
 <div class="latest-post">
     {{-- @if(session('success'))
        {{session('success')}} 

@@ -34,7 +34,7 @@
                     </div>
                     <div class="vote">
                         @foreach($post_detail->userlike as $like)
-                        @if($like->user_id == Auth::user()->id) 
+                        @if(Auth::check() && $like->user_id == Auth::user()->id) 
                             <img src="/icons/icons8-heart-outline-24-blue.png" alt="vote"
                             style="z-index:1">  
                         @else  

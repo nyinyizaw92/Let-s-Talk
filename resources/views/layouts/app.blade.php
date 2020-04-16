@@ -18,6 +18,10 @@
 
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+    {{-- <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+<script src="/js/jquery.jscroll.min.js"></script> --}}
+    
+
     @yield('styles')
 </head>
 <body>
@@ -32,7 +36,17 @@
                         <span class="navbar-toggler-icon"></span>
                     </button> --}}
                 <div class="search">
-                    <input type="text" > <p>Search</p>
+                    <form action="/search" method="POST" role="search">
+                       @csrf
+                        <div class="input-group">
+                            <input type="text" class="form-control" name="search" required> 
+    
+                            <button type="submit" class="btn btn-default">
+                               
+                            </button>
+                            
+                        </div>
+                    </form>
                 </div>
 
                 <div class="nav-login collapse navbar-collapse" id="navbarSupportedContent">
@@ -94,10 +108,13 @@
         </main>
     </div>
     
-    <script
-    src="https://code.jquery.com/jquery-3.4.1.js"
-    integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU="
-    crossorigin="anonymous"></script>
+   
+
+    {{-- <script src="https://code.jquery.com/jquery-3.4.1.js" integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU="
+    crossorigin="anonymous"></script> --}}
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    {{-- <script src="https://cdnjs.cloudflare.com/ajax/libs/jscroll/2.4.1/jquery.jscroll.js"></script> --}}
+    {{-- <script src="https://cdnjs.cloudflare.com/ajax/libs/jscroll/2.4.1/jquery.jscroll.min.js"></script> --}}
    
     <script>
        $(document).ready(function(){
@@ -106,6 +123,24 @@
         });
        })
     </script>
+    
+    {{-- <script type="text/javascript">
+        $('ul.pagination').hide();
+        $(function() {
+            
+            $('.infinite-scroll').jscroll({
+                autoTrigger: true,
+                debug: true,
+                loadingHtml: '<img class="center-block" src="/images/loading.gif" alt="Loading..." />',
+                padding: 0,
+                nextSelector: '.pagination li.active + li a',
+                contentSelector: '.infinite-scroll',
+                callback: function() {
+                    $('ul.pagination').remove();
+                }
+            });
+        });
+    </script> --}}
 
 
   @yield('scripts')

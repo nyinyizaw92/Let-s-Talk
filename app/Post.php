@@ -3,8 +3,10 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use Spatie\Searchable\Searchable;
+use Spatie\Searchable\SearchResult;
 
-class Post extends Model
+class Post extends Model implements Searchable
 {
     //
     protected $table = "posts";
@@ -37,5 +39,16 @@ class Post extends Model
     public function userlike()
     {
         return $this->hasMany(UserLikePost::class);
+    }
+
+    public function getSearchResult(): SearchResult
+    {
+        $url = route('show', $this->id);
+
+        return new SearchResult(
+            $this,
+            $this->title,
+            $url
+        );
     }
 }

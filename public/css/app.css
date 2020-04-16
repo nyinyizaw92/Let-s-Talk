@@ -51,12 +51,13 @@ body {
 }
 
 #app nav .container .search {
-  text-align: right;
+  text-align: center;
 }
 
 #app nav .container .search input {
-  padding-top: 0.5rem;
-  font-size: 18px;
+  width: 300px;
+  margin-top: 2%;
+  font-size: 12px;
   border-width: 0;
   border-bottom-width: 2px;
   border-color: #ffffff;
@@ -64,21 +65,27 @@ body {
   color: #ffffff;
   border-style: solid;
   border-radius: 0;
-  box-shadow: -1px 0 0 rgba(255, 255, 255, 0.1);
-  text-shadow: 0 0 5px rgba(66, 66, 66, 0.75);
 }
 
-#app nav .container .search input:focus {
+#app nav .container .search input:focus,
+#app nav .container .search input:active {
   outline: none;
-  padding-top: 1rem;
+  padding-top: 2%;
 }
 
-#app nav .container .search p {
-  color: white;
-  position: relative;
-  float: right;
-  font-size: 15px;
-  padding: 2px;
+#app nav .container .search button {
+  background-image: url("/icons/icons8-search-64.png");
+  width: 30px;
+  height: 30px;
+  position: absolute;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-color: #63b0d8;
+  margin-top: 5px;
+  border: 0;
+  margin-left: 5px;
+  cursor: move;
 }
 
 #app nav .container .nav-login ul {
@@ -101,6 +108,7 @@ body {
 #app nav .container .nav-login ul li .user-profile {
   display: flex;
   margin-top: -1rem;
+  margin-left: 9rem;
 }
 
 #app nav .container .nav-login ul li .user-profile a {
@@ -138,7 +146,7 @@ body {
   text-align: center;
   padding-top: 8px;
   margin-top: 10px;
-  margin-left: -0.5rem;
+  margin-left: 9rem;
   display: none;
 }
 
@@ -157,6 +165,31 @@ body {
   text-decoration: none;
   color: #948b8b;
   padding-right: 2rem;
+}
+
+.search-list .item {
+  border-top: 2px double #d8cbcb;
+  z-index: 5;
+  background: white;
+  position: relative;
+}
+
+.search-list .item .item-list {
+  padding: 1% 1% 1% 4%;
+}
+
+.search-list .item .item-list a {
+  text-decoration: none;
+}
+
+.search-list .item .item-list a h4,
+.search-list .item .item-list a p {
+  margin: 0;
+}
+
+.search-list .item .item-list a p {
+  font-size: 12px;
+  opacity: 0.8;
 }
 
 .latest-post {
@@ -179,8 +212,8 @@ body {
 }
 
 .latest-post .latest .post .user-profile {
-  width: 50px;
-  height: 50px;
+  width: 35px;
+  height: 35px;
 }
 
 .latest-post .latest .post .user-profile img {
@@ -397,6 +430,161 @@ body {
 .latest-post .info .top-user .top .post-list .post-header p,
 .latest-post .info .top-user .top .post-list .post-header h3 {
   margin: 0;
+}
+
+.infinite-scroll {
+  margin-left: 2rem;
+}
+
+.infinite-scroll .post {
+  background: white;
+  margin-bottom: 3px;
+  padding: 1rem;
+  display: flex;
+  flex-direction: row;
+}
+
+.infinite-scroll .post .user-profile {
+  width: 35px;
+  height: 35px;
+}
+
+.infinite-scroll .post .user-profile img {
+  width: 100%;
+  border: 1px solid gray;
+  border-radius: 50%;
+}
+
+.infinite-scroll .post .post-list {
+  margin-left: 1rem;
+}
+
+.infinite-scroll .post .post-list a {
+  text-decoration: none;
+}
+
+.infinite-scroll .post .post-list .post-header {
+  cursor: move;
+}
+
+.infinite-scroll .post .post-list .post-header p,
+.infinite-scroll .post .post-list .post-header h3 {
+  margin: 0;
+}
+
+.infinite-scroll .post .post-list .post-body {
+  width: 50vw;
+  display: grid;
+  grid-template-columns: 60% 40%;
+  margin-top: 5px;
+}
+
+.infinite-scroll .post .post-list .post-body .comment-vote {
+  display: flex;
+  flex-wrap: nowrap;
+}
+
+.infinite-scroll .post .post-list .post-body .comment-vote .comment,
+.infinite-scroll .post .post-list .post-body .comment-vote .vote {
+  width: 50%;
+}
+
+.infinite-scroll .post .post-list .post-body .comment-vote .comment img,
+.infinite-scroll .post .post-list .post-body .comment-vote .vote img {
+  position: absolute;
+  cursor: move;
+  z-index: 0;
+}
+
+.infinite-scroll .post .post-list .post-body .comment-vote .comment span,
+.infinite-scroll .post .post-list .post-body .comment-vote .vote span {
+  float: right;
+  position: relative;
+  margin-right: 8.5rem;
+}
+
+.infinite-scroll .post .post-list .post-body .comment-vote .comment form,
+.infinite-scroll .post .post-list .post-body .comment-vote .vote form {
+  position: absolute;
+  width: 25px;
+  z-index: 1;
+}
+
+.infinite-scroll .post .post-list .post-body .comment-vote .comment form input[type=submit],
+.infinite-scroll .post .post-list .post-body .comment-vote .vote form input[type=submit] {
+  width: 25px;
+  opacity: 0;
+  cursor: move;
+}
+
+.infinite-scroll .post .post-list .post-body .edit-delete {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+}
+
+.infinite-scroll .post .post-list .post-body .edit-delete .edit {
+  margin-right: 1rem;
+  border: 1px solid #ccc;
+  width: 54px;
+  text-align: center;
+  height: 21px;
+  border-radius: 5px;
+}
+
+.infinite-scroll .post .post-list .post-body .edit-delete .delete > form input {
+  margin-right: 1rem;
+  background: white;
+  color: red;
+  border-radius: 5px;
+}
+
+.infinite-scroll .post .post-list .add-comment {
+  display: none;
+  width: 60%;
+  height: 65px;
+  margin-top: 6px;
+}
+
+.infinite-scroll .post .post-list .add-comment form {
+  border: 1px solid #dad3d3;
+  width: 90%;
+  height: 34px;
+  border-radius: 5px;
+  padding: 1px;
+}
+
+.infinite-scroll .post .post-list .add-comment form textarea {
+  resize: none;
+  width: 85%;
+  height: 28px;
+  border: 0;
+  padding: 3px;
+}
+
+.infinite-scroll .post .post-list .add-comment form label img {
+  position: absolute;
+  width: 30px;
+  height: 30px;
+  z-index: 1;
+}
+
+.infinite-scroll .post .post-list .add-comment form label input[type=file] {
+  position: absolute;
+  z-index: 2;
+  width: 43px;
+  height: 35px;
+  margin-left: -5px;
+  opacity: 0;
+}
+
+nav ul {
+  list-style: none !important;
+  display: inline-flex !important;
+}
+
+nav ul li {
+  width: 30px !important;
 }
 
 .post-detail {
@@ -1090,6 +1278,10 @@ body {
   justify-content: flex-end;
   padding: 1rem 2rem 0 0;
   list-style: none;
+}
+
+.login-user nav .container .nav-login ul li {
+  width: 130px !important;
 }
 
 .login-user nav .container .nav-login ul li a {

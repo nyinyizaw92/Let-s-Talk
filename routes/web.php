@@ -31,4 +31,6 @@ Route::get('/post/show/{id}', 'PostController@show')->name('show');
 Route::resource('/category', 'CategoryController')->middleware('auth');
 Route::resource('/comment', 'CommentController')->middleware('auth');
 Route::resource('/reply-comment', 'ReplyCommentController')->middleware('auth');
+
+Route::any('/search', 'SearchController@search')->name('search');
 // Route::get('/latest-post', 'LatestPostController@index')->name('latest-post');

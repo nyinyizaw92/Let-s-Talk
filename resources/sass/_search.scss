@@ -1,0 +1,24 @@
+.search-list {
+    .item {
+        border-top: 2px double #d8cbcb;
+        z-index: 5;
+        background: white;
+        position: relative;
+        .item-list {
+            padding: 1% 1% 1% 4%;
+            a {
+                text-decoration: none;
+
+                h4,
+                p {
+                    margin: 0;
+                }
+
+                p {
+                    font-size: 12px;
+                    opacity: 0.8;
+                }
+            }
+        }
+    }
+}

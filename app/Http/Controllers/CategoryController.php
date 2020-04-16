@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Category;
+use App\Post;
 use Illuminate\Http\Request;
 
 class CategoryController extends Controller
@@ -56,7 +57,8 @@ class CategoryController extends Controller
      */
     public function show(Category $category)
     {
-        //
+        // $companies = Post::where('category_id', $category->id)->get();
+        // return view('category', compact('category', 'companies'));
     }
 
     /**
