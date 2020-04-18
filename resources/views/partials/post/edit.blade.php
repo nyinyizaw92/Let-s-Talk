@@ -23,9 +23,9 @@
         </div>
 
         <div class="old-category">
-            <label for="category">Category</label><br/>
+            <label for="category_id">Category</label><br/>
 
-            <select name="category" id="category" required>
+            <select name="category_id" id="category_id" required>
                 <option value="{{$post->category->id}}">{{$post->category->title}}</option>
             @foreach($categories as $category)
                 <option value="{{$category->id}}">{{$category->title}}</option>
@@ -37,7 +37,7 @@
             @if($post->image !== null)
             <img src="/uploads/{{$post->image}}" alt="image">
             @else 
-                <label for="file">
+                <label for="image">
                     <img src="/icons/icons8-upload-100.png" alt="image">
                 </label>
            
@@ -45,7 +45,7 @@
 
             <div class="post-image">
                 {{-- <label for="file">Update Images</label> --}}
-                <input type="file" name="file" id="file">
+                <input type="file" name="image" id="image">
             </div>
         </div>
       

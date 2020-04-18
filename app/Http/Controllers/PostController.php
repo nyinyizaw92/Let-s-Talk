@@ -7,6 +7,7 @@ use App\Category;
 use App\Comment;
 use Illuminate\Http\Request;
 use App\Http\Requests\PostSaveRequest;
+use App\Http\Requests\PostUpdateRequest;
 use App\Http\Resources\PostResource;
 use App\Http\Resources\PostResourceCollection;
 use App\UserLikePost;
@@ -48,27 +49,17 @@ class PostController extends Controller
      */
     public function store(PostSaveRequest $request)
     {
+        $create = $request->except('image');
         $image = $request->file('image');
-
         $post_create = new Post();
-        $post_create->user_id = $request->user_id;
-        $post_create->title = $request->title;
-        $post_create->content = $request->content;
-        $post_create->category_id = $request->category_id;
-
         if ($image) {
             $target_path = public_path('/uploads/');
             $files =  date('YmdHis') . "." . $image->getClientOriginalExtension();
             if ($image->move($target_path, $files)) {
-
-                $post_create->image = $files;
-                $post_create->save();
+                $create['image'] = $files;
             }
-        } else {
-            $post_create->create($request->all());
         }
-
-
+        $post_create->create($create);
         return redirect('/')->with('success', 'post save');
     }
 
@@ -107,22 +98,18 @@ class PostController extends Controller
      * @param  \App\Post  $post
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Post $post)
+    public function update(PostUpdateRequest $request, Post $post)
     {
-        $post_update = Post::find($post->id);
-        $image = $request->file('file');
-        $post_update->title = $request['title'];
-        $post_update->content = $request['content'];
-        $post_update->category_id = $request['category'];
-
+        $update = $request->except('image');
+        $image = $request->file('image');
         if ($image) {
             $target_path = public_path('/uploads/');
             $files =  date('YmdHis') . "." . $image->getClientOriginalExtension();
             if ($image->move($target_path, $files)) {
-                $post_update->image = $files;
+                $update['image'] = $files;
             }
         }
-        $post_update->save();
+        $post->update($update);
         return redirect('/')->with('success', 'post save');
     }
 
@@ -134,17 +121,17 @@ class PostController extends Controller
      */
     public function destroy(Post $post)
     {
-        $post_id = $post->id;
-        if (is_array($post_id) || is_object($post_id)) {
-            foreach ($post_id as $id) {
-                $comment = Comment::where('post_id', $id)->delete();
-            }
+        // $post_id = $post->id;
+        // if (is_array($post_id) || is_object($post_id)) {
+        //     foreach ($post_id as $id) {
+        //         $comment = Comment::where('post_id', $id)->delete();
+        //     }
 
-            foreach ($post_id as $id) {
-                $like = UserLikePost::where('post_id', $id)->delete();
-            }
-        }
-        $post_delete = Post::find($post->id)->delete();
+        //     foreach ($post_id as $id) {
+        //         $like = UserLikePost::where('post_id', $id)->delete();
+        //     }
+        // }
+        $post->delete();
         return redirect('/')->with('errors', 'post delete');
     }
 }

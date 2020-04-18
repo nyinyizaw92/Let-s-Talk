@@ -6,94 +6,37 @@ use App\ReplyComment;
 use App\Comment;
 use App\Post;
 use App\Http\Requests\ReplyCommentRequest;
+use App\Http\Requests\ReplyCommentUpdateRequest;
+use App\Services\UserPostLikeService;
 use Illuminate\Http\Request;
 
 class ReplyCommentController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index()
-    {
-        //
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(ReplyCommentRequest $request)
+    public function store(ReplyCommentRequest $request, UserPostLikeService $postcomment)
     {
 
         $has_reply = Comment::findOrFail($request->comment_id);
         $has_reply->has_reply = true;
         $has_reply->update();
 
-        $post_comment = Post::findOrFail($request->post_id);
-        $post_comment->increment('comment_count');
-        $post_comment->update();
+        $comment_count_inc_dec = $postcomment->post_comment_inc_dec($request->post_id, "increment");
+        $comment_count_inc_dec->update();
 
+        $create = $request->except('image');
         $image = $request->file('image');
 
         $reply_comment = new ReplyComment();
-        $reply_comment->user_id = $request->user_id;
-        $reply_comment->comment_id = $request->comment_id;
-        $reply_comment->answer = $request->answer;
-
         if ($image) {
             $target_path = public_path('/comments/');
             $files =  date('YmdHis') . "." . $image->getClientOriginalExtension();
             if ($image->move($target_path, $files)) {
-
-                $reply_comment->image = $files;
-                // $reply_comment->save();
+                $create['image'] = $files;
             }
         }
 
-        $reply_comment->save();
-        // $replyComment = new ReplyComment();
-        // $replyComment->user_id = $request->user_id;
-        // $replyComment->comment_id = $request->comment_id;
-        // $replyComment->new_comment_id = $comment->id;
-        // $replyComment->save();
+        $reply_comment->create($create);
 
         return back();
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\ReplyComment  $replyComment
-     * @return \Illuminate\Http\Response
-     */
-    public function show(ReplyComment $replyComment)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\ReplyComment  $replyComment
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(ReplyComment $replyComment)
-    {
-        //
     }
 
     /**
@@ -103,24 +46,20 @@ class ReplyCommentController extends Controller
      * @param  \App\ReplyComment  $replyComment
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, ReplyComment $replyComment)
+    public function update(ReplyCommentUpdateRequest $request, ReplyComment $replyComment)
     {
+        $update = $request->except('image');
         $image = $request->file('image');
-
-        $update_comment = ReplyComment::findOrFail($replyComment->id);
-        $update_comment->answer = $request->answer;
 
         if ($image) {
             $target_path = public_path('/comments/');
             $files =  date('YmdHis') . "." . $image->getClientOriginalExtension();
             if ($image->move($target_path, $files)) {
-
-                $update_comment->image = $files;
-                // $comment->save();
+                $update['image'] = $files;
             }
         }
 
-        $update_comment->save();
+        $replyComment->update($update);
 
         return back();
     }
@@ -131,14 +70,12 @@ class ReplyCommentController extends Controller
      * @param  \App\ReplyComment  $replyComment
      * @return \Illuminate\Http\Response
      */
-    public function destroy(ReplyComment $replyComment)
+    public function destroy(ReplyComment $replyComment, UserPostLikeService $postcomment)
     {
         $comment = Comment::findOrFail($replyComment->comment_id);
-        $post_id = Post::findOrFail($comment->post_id);
-        $post_id->decrement('comment_count');
-        $post_id->update();
-
-        $delete_rpl_cmt = ReplyComment::findOrFail($replyComment->id)->delete();
+        $comment_count_inc_dec = $postcomment->post_comment_inc_dec($comment->post_id, "decrement");
+        $comment_count_inc_dec->update();
+        $replyComment->delete();
         return back();
     }
 }

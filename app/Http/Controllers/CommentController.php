@@ -6,7 +6,9 @@ use App\Comment;
 use App\Post;
 use Illuminate\Http\Request;
 use App\Http\Requests\CommentRequest;
+use App\Http\Requests\CommentUpdateRequest;
 use App\ReplyComment;
+use App\Services\UserPostLikeService;
 
 class CommentController extends Controller
 {
@@ -39,26 +41,20 @@ class CommentController extends Controller
     public function store(CommentRequest $request)
     {
 
+        $create = $request->except('image');
         $image = $request->file('image');
-
         $comment = new Comment();
-        $comment->user_id = $request->user_id;
-        $comment->post_id = $request->post_id;
-        $comment->answer = $request->answer;
 
         if ($image) {
             $target_path = public_path('/comments/');
             $files =  date('YmdHis') . "." . $image->getClientOriginalExtension();
             if ($image->move($target_path, $files)) {
 
-                $comment->image = $files;
-                $comment->save();
+                $create['image'] = $files;
             }
-        } else {
-            $comment->create($request->all());
         }
 
-
+        $comment->create($create);
 
         $post_comment = Post::findOrFail($request->post_id);
         $post_comment->increment('comment_count');
@@ -96,25 +92,20 @@ class CommentController extends Controller
      * @param  \App\Comment  $comment
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Comment $comment)
+    public function update(CommentUpdateRequest $request, Comment $comment)
     {
-        //dd($comment);
+        $update = $request->except('image');
         $image = $request->file('image');
-
-        $update_comment = Comment::findOrFail($comment->id);
-        $update_comment->answer = $request->answer;
 
         if ($image) {
             $target_path = public_path('/comments/');
             $files =  date('YmdHis') . "." . $image->getClientOriginalExtension();
             if ($image->move($target_path, $files)) {
-
-                $update_comment->image = $files;
-                //$comment->save();
+                $update['image'] = $files;
             }
         }
 
-        $update_comment->save();
+        $comment->update($update);
 
         return back();
     }
@@ -125,29 +116,25 @@ class CommentController extends Controller
      * @param  \App\Comment  $comment
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Comment $comment)
+    public function destroy(Comment $comment, UserPostLikeService $postcomment)
     {
         $comment = Comment::findOrFail($comment->id);
 
         if ($comment->has_reply == 1) {
             $reply_comment = ReplyComment::where('comment_id', $comment->id)->get();
             foreach ($reply_comment as $rpl_cmt) {
-                $delete = $rpl_cmt->delete();
-
-                $post_id = Post::findOrFail($comment->post_id);
-                $post_id->decrement('comment_count');
-                $post_id->update();
+                $rpl_cmt->delete();
+                $comment_count_inc_dec = $postcomment->post_comment_inc_dec($comment->post_id, "decrement");
+                $comment_count_inc_dec->update();
             }
 
-            $post_id = Post::findOrFail($comment->post_id);
-            $post_id->decrement('comment_count');
-            $post_id->update();
-            $delete_comment = $comment->delete();
-        } else {
-            $post_id = Post::findOrFail($comment->post_id);
-            $post_id->decrement('comment_count');
-            $post_id->update();
-            $delete_comment = $comment->delete();
+            $comment_count_inc_dec = $postcomment->post_comment_inc_dec($comment->post_id, "decrement");
+            $comment_count_inc_dec->update();
+            $comment->delete();
+        } elseif ($comment->has_reply == 0) {
+            $comment_count_inc_dec = $postcomment->post_comment_inc_dec($comment->post_id, "decrement");
+            $comment_count_inc_dec->update();
+            $comment->delete();
         }
 
         return back();

@@ -66,11 +66,14 @@
         
                     <label for="image">
                         <img src="/icons/icons8-image-file-50.png" />
-                        <input id="image" name="image" type="file"  />
+                        <input id="image" name="image" type="file"  class="preview_image" data-id="{{$post_detail->id}}" />
                     </label>
                 
                     <input type="submit" value="">
                 </form>
+                <div class="preview" id="showimage{{$post_detail->id}}">
+                    <img id="output_image{{$post_detail->id}}"/>
+                </div>
             </div>
         {{-- end post comment --}}
             @foreach($comments as $comment)
@@ -134,10 +137,12 @@
                                                         
                                                         </div>
                                                         <div class="file">
-                                                            <input id="image" name="image" type="file"  />
+                                                            <input id="image" name="image" type="file"
+                                                            />
                                                         </div>
                                                         <input type="submit" value="Update">
                                                 </form>
+                                               
                                             </div>
                                             {{-- end comment update modal box --}}
                                         </div>
@@ -234,11 +239,15 @@
                    
                                <label for="image">
                                    <img src="/icons/icons8-image-file-50.png" />
-                                   <input id="image" name="image" type="file"  />
+                                   <input id="image" name="image" type="file" class="preview_reply_image" data-id="{{$comment->id}}" />
                                </label>
         
                                <input type="submit" value="">
                            </form>
+
+                        <div class="preview_reply" id="show_reply_image{{$comment->id}}">
+                            <img id="output_reply_image{{$comment->id}}"/>
+                        </div>
                         </div>
                     </div>
                 @endif
@@ -266,7 +275,63 @@ $(document).ready(function(){
             var id = $(this).data('id');
             $('.'+id+'').toggle();
         });
+
+        $('.preview_image').change(function(e){
+        var image_id = $(this).data('id');
+        console.log(image_id);
+
+        var reader = new FileReader();
+        reader.onload = function()
+        {        
+            var output = document.getElementById('output_image'+image_id);
+            $('#showimage'+image_id+'').css("display","block");
+            output.src = reader.result;
+        }
+            reader.readAsDataURL(e.target.files[0]);
+        
+        })
+
+        $('.preview_reply_image').change(function(e){
+        var image_id = $(this).data('id');
+        console.log(image_id);
+
+        var reader = new FileReader();
+        reader.onload = function()
+        {        
+            var output = document.getElementById('output_reply_image'+image_id);
+            $('#show_reply_image'+image_id+'').css("display","block");
+            output.src = reader.result;
+        }
+            reader.readAsDataURL(e.target.files[0]);
+        
+        })
     });
     
 </script>
+{{-- <script>
+function loadPreview(input) {
+   // id = id || '#preview_img';
+    if (input.files && input.files[0]) {
+
+        var image_holder = $("#preview_img");
+        image_holder.empty();
+
+        var reader = new FileReader();
+
+        reader.onload = function (e) {
+            // $(id)
+            //         .attr('src', e.target.result)
+            //         .width(200)
+            //         .height(150);
+             $("<img />", {
+                    "src": e.target.result,
+                    "class": "thumb-image"
+                }).appendTo(image_holder);
+        };
+         image_holder.show();
+
+        reader.readAsDataURL(input.files[0]);
+    }
+}
+</script> --}}
 @endsection

@@ -119,8 +119,11 @@
                             placeholder="comment...."></textarea>
 
                             <label for="image">
-                                <img src="/icons/icons8-image-file-50.png" />
-                                <input id="image" name="image" type="file"  />
+                                <img src="/icons/icons8-image-file-50.png"/>
+                                <input id="image" name="image"
+                                 type="file" class="preview_image" data-id="{{$post->id}}"/>
+                                 {{-- onchange="loadPreview(this);"/> --}}
+                                 {{-- <img id="output_image"/> --}}
                             </label>
                             
                            
@@ -130,6 +133,16 @@
                                 <input type="submit" value="Submit">
                             
                         </form>
+
+                        <div class="preview" id="showimage{{$post->id}}">
+                            <img id="output_image{{$post->id}}"/>
+                        </div>
+                        {{-- <div id="show+{{$post->id}}+">
+                            <div id="preview_img" data-id="{{$post->id}}">
+                                
+                            </div>
+                        </div> --}}
+                        
                     </div>
                 </div>
             </div>
@@ -193,7 +206,7 @@
             @endforeach
         
         @else 
-                <p>No Top Users</p>
+            <p>No Top Users</p>
         @endif
        </div>
    </div>
@@ -210,6 +223,57 @@
                 $('#'+id+'').css("display","none");
             })
         });
-    });
+
+        $('.preview_image').change(function(e){
+        var image_id = $(this).data('id');
+        console.log(image_id);
+
+        var reader = new FileReader();
+        reader.onload = function()
+        {        
+            var output = document.getElementById('output_image'+image_id);
+            $('#showimage'+image_id+'').css("display","block");
+            output.src = reader.result;
+        }
+            reader.readAsDataURL(e.target.files[0]);
+        
+        })
+     });
+</script>
+<script>
+   
+// function preview_image(event) 
+// {
+//  var reader = new FileReader();
+//  reader.onload = function()
+//  {
+//   var output = document.getElementById('output_image');
+//   output.src = reader.result;
+//  }
+//  reader.readAsDataURL(event.target.files[0]);
+// }
+// function loadPreview(input) {
+//     var id = input.id;
+//     console.log(id);
+//    // id = id || '#preview_img';
+//     if (input.files && input.files[0]) {
+       
+//         var image_holder = $("#preview_img");
+//         image_holder.empty();
+
+//         var reader = new FileReader();
+//         reader.onload = function (e) {
+//              $("<img />", {
+//                     "src": e.target.result,
+//                     "class": "thumb-image",
+//                     "id" : id
+//                 }).appendTo(image_holder);
+//         };
+//          $('#show'+id+'').show();
+
+//         reader.readAsDataURL(input.files[0]);
+//     }
+// }
+
 </script>
 @endsection
