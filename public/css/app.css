@@ -199,6 +199,15 @@ body {
   justify-content: center;
 }
 
+.latest-post .alert-success {
+  position: absolute;
+  text-align: center;
+  margin: 10px 5rem 0 7rem;
+  width: 80%;
+  background: #5cb85c;
+  color: white;
+}
+
 .latest-post .latest {
   margin: 3rem 1rem 3rem 3rem;
 }
@@ -418,8 +427,8 @@ body {
 }
 
 .latest-post .info .top-user .top .user-profile {
-  width: 40px;
-  height: 40px;
+  width: 35px;
+  height: 35px;
 }
 
 .latest-post .info .top-user .top .user-profile img {
@@ -1196,6 +1205,93 @@ nav ul li {
 .post-detail .user-info {
   background: white;
   margin: 3rem 3rem 3rem 1rem;
+}
+
+.post-create {
+  padding: 3rem;
+}
+
+.post-create h3 {
+  margin: 0 0 0 9rem;
+}
+
+.post-create form {
+  margin-top: 2rem;
+}
+
+.post-create form .text-danger {
+  margin-left: 4.5rem;
+  color: red;
+  font-size: 11px;
+}
+
+.post-create form .post-title input[type=text] {
+  margin-left: 2.25rem;
+  width: 250px;
+  height: 30px;
+  border-radius: 5px;
+  border: 1px solid #8dad8d;
+}
+
+.post-create form .post-content {
+  display: flex;
+  margin-top: 1rem;
+}
+
+.post-create form .post-content textarea {
+  margin-left: 1rem;
+  resize: none;
+  width: 250px;
+  height: 5rem;
+  border-radius: 5px;
+  border: 1px solid #8dad8d;
+}
+
+.post-create form .post-category {
+  margin-top: 1rem;
+}
+
+.post-create form .post-category select {
+  margin-left: 0.4rem;
+  width: 255px;
+  border-radius: 5px;
+  border: 1px solid #8dad8d;
+}
+
+.post-create form .post-image {
+  margin-top: 1rem;
+}
+
+.post-create form .post-image input[type=file] {
+  margin-left: 1.2rem;
+  width: 250px;
+}
+
+.post-create form .post-image .add-image {
+  display: none;
+  margin-left: 4.5rem;
+  margin-top: 1rem;
+  width: 150px;
+  height: 150px;
+}
+
+.post-create form .post-image .add-image img {
+  width: 100%;
+  height: 100%;
+}
+
+.post-create form .post-save {
+  display: flex;
+  margin-top: 1rem;
+  margin-left: 4.5rem;
+}
+
+.post-create form .post-save .save {
+  margin-left: 2rem;
+}
+
+.post-create form .post-save .save input {
+  width: 65px;
 }
 
 .post-edit form {

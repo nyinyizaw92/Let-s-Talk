@@ -35,17 +35,17 @@
 
         <div class="old-img">
             @if($post->image !== null)
-            <img src="/uploads/{{$post->image}}" alt="image">
+            <img src="/uploads/{{$post->image}}" alt="image" id="edit-image">
             @else 
                 <label for="image">
-                    <img src="/icons/icons8-upload-100.png" alt="image">
+                    <img src="/icons/icons8-upload-100.png" alt="image" id="edit-image">
                 </label>
            
             @endif
 
             <div class="post-image">
                 {{-- <label for="file">Update Images</label> --}}
-                <input type="file" name="image" id="image">
+                <input type="file" name="image" id="image" onchange="preview_image(event)">
             </div>
         </div>
       
@@ -60,4 +60,19 @@
         </div>
     </form>
 </div>
+@endsection
+@section('scripts') 
+<script>
+    function preview_image(event) 
+     {
+      var reader = new FileReader();
+      reader.onload = function()
+      {
+       var output = document.getElementById('edit-image');
+       output.src = reader.result;
+      }
+      reader.readAsDataURL(event.target.files[0]);
+    }
+    
+    </script>
 @endsection

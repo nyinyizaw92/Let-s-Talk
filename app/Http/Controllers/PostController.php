@@ -60,7 +60,7 @@ class PostController extends Controller
             }
         }
         $post_create->create($create);
-        return redirect('/')->with('success', 'post save');
+        return redirect('/')->with('success', 'Create post success.');
     }
 
     /**
@@ -110,7 +110,7 @@ class PostController extends Controller
             }
         }
         $post->update($update);
-        return redirect('/')->with('success', 'post save');
+        return redirect('/')->with('success', 'success update post');
     }
 
     /**

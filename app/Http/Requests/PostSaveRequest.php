@@ -31,4 +31,16 @@ class PostSaveRequest extends FormRequest
             'image' => 'file',
         ];
     }
+
+    public function messages()
+
+    {
+
+        return [
+
+            'title.required' => 'The title can not be blank value',
+            'content.requied' => 'The content can not be blank value',
+            'category_id.required' => 'Choose one of the category type'
+        ];
+    }
 }

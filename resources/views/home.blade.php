@@ -27,7 +27,11 @@
     {{-- @if(session('success'))
        {{session('success')}} 
     @endif --}}
-
+    @if (session('success'))
+    <div class="alert alert-success" style="position:absolute">
+        {{ session('success') }}
+    </div>
+    @endif
    <div class="latest">
     @if($posts !== "null")
         @foreach ($posts as $post)
@@ -237,7 +241,14 @@
         }
             reader.readAsDataURL(e.target.files[0]);
         
-        })
+        });
+
+        $(document).ready(function () {          
+
+        setTimeout(function() {
+            $('.alert-success').slideUp("slow");
+        }, 2000);
+        });
      });
 </script>
 <script>
