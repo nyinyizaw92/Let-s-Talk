@@ -40,7 +40,7 @@ class CommentController extends Controller
      */
     public function store(CommentRequest $request)
     {
-
+       // dd($request->all());
         $create = $request->except('image');
         $image = $request->file('image');
         $comment = new Comment();

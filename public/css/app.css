@@ -316,7 +316,6 @@ body {
 }
 
 .latest-post .latest .post .post-list .add-comment {
-  display: none;
   width: 60%;
   height: 65px;
   margin-top: 6px;
@@ -378,6 +377,12 @@ body {
   margin: 10px 0 0 10px;
 }
 
+.latest-post .info p {
+  margin: 0;
+  padding: 1rem;
+  font-size: 12px;
+}
+
 .latest-post .info .popular-post {
   background: white;
   margin: 0.5rem;
@@ -416,6 +421,12 @@ body {
 
 .latest-post .info .top-user h4 {
   margin: 10px 0 0 10px;
+}
+
+.latest-post .info .top-user p {
+  margin: 0;
+  padding: 1rem;
+  font-size: 12px;
 }
 
 .latest-post .info .top-user .top {
@@ -1212,7 +1223,7 @@ nav ul li {
 }
 
 .post-create h3 {
-  margin: 0 0 0 9rem;
+  margin: 0 0 0 5rem;
 }
 
 .post-create form {
@@ -1227,10 +1238,11 @@ nav ul li {
 
 .post-create form .post-title input[type=text] {
   margin-left: 2.25rem;
-  width: 250px;
-  height: 30px;
+  width: 340px;
+  height: 25px;
   border-radius: 5px;
-  border: 1px solid #8dad8d;
+  border: 1px solid #ccc;
+  padding: 5px;
 }
 
 .post-create form .post-content {
@@ -1238,24 +1250,20 @@ nav ul li {
   margin-top: 1rem;
 }
 
-.post-create form .post-content textarea {
+.post-create form .post-content .quillWrapper {
   margin-left: 1rem;
-  resize: none;
-  width: 250px;
-  height: 5rem;
-  border-radius: 5px;
-  border: 1px solid #8dad8d;
 }
 
 .post-create form .post-category {
-  margin-top: 1rem;
+  margin-top: 4rem;
 }
 
 .post-create form .post-category select {
   margin-left: 0.4rem;
-  width: 255px;
+  width: 350px;
+  height: 30px;
   border-radius: 5px;
-  border: 1px solid #8dad8d;
+  border: 1px solid #ccc;
 }
 
 .post-create form .post-image {
@@ -1268,7 +1276,6 @@ nav ul li {
 }
 
 .post-create form .post-image .add-image {
-  display: none;
   margin-left: 4.5rem;
   margin-top: 1rem;
   width: 150px;
@@ -1342,6 +1349,17 @@ nav ul li {
   grid-template-columns: 40% 60%;
   position: relative;
   padding: 10px 0 0;
+}
+
+.post-edit form .old-img .cancle-image {
+  position: absolute;
+  margin-left: 4rem;
+  margin-top: 10px;
+  background: red;
+  width: 15px;
+  height: 20px;
+  color: white;
+  cursor: move;
 }
 
 .post-edit form .old-img img {

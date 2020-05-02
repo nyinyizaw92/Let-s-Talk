@@ -34,7 +34,32 @@
     @endif
    <div class="latest">
     @if($posts !== "null")
-        @foreach ($posts as $post)
+        <latest-post-display :posts="{{$posts}}" :user = {{$user}}>
+            <template scope="props">
+                <form action="{{route('comment.store')}}" method="POST"
+                enctype="multipart/form-data">
+                @csrf
+                    <input type="hidden" name="user_id" @if(Auth::check()) value="{{Auth::user()->id}}" @endif />
+                    <input type="hidden" name="post_id" :value="props.postid" />
+                    <textarea name="answer" id="answer" cols="30" rows="2"
+                    placeholder="comment...."></textarea>
+
+                    <label for="image">
+                        <img src="/icons/icons8-image-file-50.png"/>
+                        <input id="image" name="image"
+                            type="file" class="preview_image" :data-id="props.postid"/>
+                    </label>
+                    
+                    
+                    <input type="button" value="Cancle" id="reset">
+                    
+                    <input type="submit" value="Submit">
+                    
+                </form> 
+                
+            </template>
+        </latest-post-display>
+        {{-- @foreach ($posts as $post)
             <div class="post">
                 <div class="user-profile">
                     @if($post->user->profile == null)
@@ -61,6 +86,7 @@
                             <div class="vote">
                             
                                 @if(Auth::check())
+                                 
                                     @if(count($post->userlike) == 0)
                                         <img src="/icons/icons8-heart-outline-24.png" alt="vote">     
                                     @else
@@ -78,7 +104,7 @@
                                     <form action="{{route('post-like.store')}}" method="POST"
                                     >
                                     @csrf
-                                    <input type="hidden" name="user_id" @if(Auth::check()) value="{{Auth::user()->id}}" @endif />
+                                    <input type="hidden" name="user_id" value="{{Auth::user()->id}}" />
                                     <input type="hidden" name="post_id" value="{{$post->id}}" />
                                     <input type="submit" value="">
                                     </form>
@@ -87,7 +113,7 @@
                                     <form action="{{route('post-like.store')}}" method="POST"
                                     >
                                     @csrf
-                                    <input type="hidden" name="user_id" @if(Auth::check()) value="{{Auth::user()->id}}" @endif />
+                                  
                                     <input type="hidden" name="post_id" value="{{$post->id}}" />
                                     <input type="submit" value="">
                                     </form>
@@ -115,8 +141,8 @@
 
                     <div class="add-comment" id="{{$post->id}}">
                         <form action="{{route('comment.store')}}" method="POST"
-                        enctype="multipart/form-data">
-                        @csrf
+                            enctype="multipart/form-data">
+                            @csrf
                             <input type="hidden" name="user_id" @if(Auth::check()) value="{{Auth::user()->id}}" @endif />
                             <input type="hidden" name="post_id" value="{{$post->id}}" />
                             <textarea name="answer" id="answer" cols="30" rows="2"
@@ -126,12 +152,9 @@
                                 <img src="/icons/icons8-image-file-50.png"/>
                                 <input id="image" name="image"
                                  type="file" class="preview_image" data-id="{{$post->id}}"/>
-                                 {{-- onchange="loadPreview(this);"/> --}}
-                                 {{-- <img id="output_image"/> --}}
                             </label>
                             
                            
-                            {{-- <input type="file" name="image" id="image" value="upload"> --}}
                             <input type="button" value="Cancle" id="reset">
                            
                                 <input type="submit" value="Submit">
@@ -141,16 +164,12 @@
                         <div class="preview" id="showimage{{$post->id}}">
                             <img id="output_image{{$post->id}}"/>
                         </div>
-                        {{-- <div id="show+{{$post->id}}+">
-                            <div id="preview_img" data-id="{{$post->id}}">
-                                
-                            </div>
-                        </div> --}}
-                        
+                       
+                       
                     </div>
                 </div>
             </div>
-        @endforeach
+        @endforeach --}}
     @else 
         <h4>No new post</h4>
     @endif
@@ -229,14 +248,17 @@
         });
 
         $('.preview_image').change(function(e){
+
+            
         var image_id = $(this).data('id');
-        console.log(image_id);
+        console.log('image id',image_id);
 
         var reader = new FileReader();
         reader.onload = function()
         {        
-            var output = document.getElementById('output_image'+image_id);
-            $('#showimage'+image_id+'').css("display","block");
+           
+           var output = document.getElementById('output_image'+image_id);
+            $('#showimage'+image_id).css("display","block");
             output.src = reader.result;
         }
             reader.readAsDataURL(e.target.files[0]);
@@ -251,40 +273,5 @@
         });
      });
 </script>
-<script>
-   
-// function preview_image(event) 
-// {
-//  var reader = new FileReader();
-//  reader.onload = function()
-//  {
-//   var output = document.getElementById('output_image');
-//   output.src = reader.result;
-//  }
-//  reader.readAsDataURL(event.target.files[0]);
-// }
-// function loadPreview(input) {
-//     var id = input.id;
-//     console.log(id);
-//    // id = id || '#preview_img';
-//     if (input.files && input.files[0]) {
-       
-//         var image_holder = $("#preview_img");
-//         image_holder.empty();
 
-//         var reader = new FileReader();
-//         reader.onload = function (e) {
-//              $("<img />", {
-//                     "src": e.target.result,
-//                     "class": "thumb-image",
-//                     "id" : id
-//                 }).appendTo(image_holder);
-//         };
-//          $('#show'+id+'').show();
-
-//         reader.readAsDataURL(input.files[0]);
-//     }
-// }
-
-</script>
 @endsection

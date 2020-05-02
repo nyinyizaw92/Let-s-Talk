@@ -12,6 +12,7 @@ class UserLikePostController extends Controller
 {
     public function store(UserLikePostRequest $request, UserPostLikeService $postlike)
     {
+       // dd($request->all());
         $post_like_table = UserLikePost::where([
             ['user_id', '=', $request->user_id],
             ['post_id', '=', $request->post_id],

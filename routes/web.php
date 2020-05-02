@@ -23,14 +23,13 @@ Route::resource('/user', 'UserController')->middleware('auth');
 Route::resource('/post-like', 'UserLikePostController')->middleware('auth');
 
 Route::get('/', 'LatestPostController@index');
-// Route::get('/post/{id}', 'PostController@show');
 Route::resource('/post', 'PostController')->middleware('auth')->except(['show', 'index']);
 Route::get('/post/index', 'PostController@index')->name('index');
 Route::get('/post/show/{id}', 'PostController@show')->name('show');
+// Route::delete('/post/{id}','PostController@destroy')->name('delete');
 
 Route::resource('/category', 'CategoryController')->middleware('auth');
 Route::resource('/comment', 'CommentController')->middleware('auth');
 Route::resource('/reply-comment', 'ReplyCommentController')->middleware('auth');
 
 Route::any('/search', 'SearchController@search')->name('search');
-// Route::get('/latest-post', 'LatestPostController@index')->name('latest-post');

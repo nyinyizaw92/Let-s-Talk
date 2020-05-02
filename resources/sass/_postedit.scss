@@ -46,6 +46,17 @@
             position: relative;
             padding: 10px 0 0;
 
+            .cancle-image {
+                position: absolute;
+                margin-left: 4rem;
+                margin-top: 10px;
+                background: red;
+                width: 15px;
+                height: 20px;
+                color: white;
+                cursor: move;
+            }
+
             img {
                 margin-left: 4rem;
                 width: 70%;

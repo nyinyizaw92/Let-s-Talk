@@ -18,7 +18,7 @@
         <div class="post-list">
             <div class="post-header">
                 <h3>{{$post_detail->title}} <span>{{$post_detail->category->title}}</span></h3>
-                <p>{{$post_detail->content}}</p>
+                <p>{!!$post_detail->content!!}</p>
                 @if($post_detail->image !== null)
                     <div class="post-img">
                         <img src="/uploads/{{$post_detail->image}}" alt="image">

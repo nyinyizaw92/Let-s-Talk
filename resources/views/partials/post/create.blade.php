@@ -7,21 +7,13 @@
 </style> 
 @endsection
 @section('content')
-<div class="post-create">
-   
-    {{-- @if ($errors->any())
-        <ul>
-            @foreach ($errors->all() as $error)
-            <li>{{ $error }}</li>
-            @endforeach
-        </ul>
-     @endif --}}
-    
+
+    <create-post :categories="{{$categories}}" :user = {{$user}}></create-post>
+
+{{-- <div class="post-create">
 
     <h3>Add Post</h3>
-    {{-- @if (session('messages')) 
-       
-    @endif --}}
+   
     <form action="{{route('post.store')}}" method="POST" enctype="multipart/form-data">
         @csrf   
         <input type="hidden" value="{{Auth::user()->id}}" name="user_id">
@@ -79,7 +71,7 @@
             </div> 
         </div>
     </form>
-</div>
+</div> --}}
 @endsection
 @section('scripts')
 <script>

@@ -112,7 +112,7 @@
                 }
 
                 .add-comment {
-                    display: none;
+                   // display: none;
                     width: 60%;
                     height: 65px;
                     margin-top: 6px;
@@ -175,6 +175,12 @@
         h4 {
             margin: 10px 0 0 10px;
         }
+
+        p{
+            margin: 0;
+            padding: 1rem;
+            font-size: 12px;
+        }
         .popular-post {
             background: white;
             margin: 0.5rem;
@@ -210,6 +216,12 @@
 
             h4 {
                 margin: 10px 0 0 10px;
+            }
+
+            p{
+                margin: 0;
+                padding: 1rem;
+                font-size: 12px;
             }
             .top {
                 background: white;

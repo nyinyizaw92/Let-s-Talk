@@ -2,7 +2,7 @@
     padding: 3rem;
 
     h3 {
-        margin: 0 0 0 9rem;
+        margin: 0 0 0 5rem;
     }
     form {
 
@@ -17,34 +17,39 @@
         .post-title {
             input[type='text'] {
                 margin-left: 2.25rem;
-                width: 250px;
-                height: 30px;
+                width: 340px;
+                height: 25px;
                 border-radius: 5px;
-                border: 1px solid #8dad8d;
+                border: 1px solid #ccc;
+                padding: 5px;
             }
         }
 
         .post-content {
             display: flex;
             margin-top: 1rem;
-
-            textarea {
-                margin-left: 1rem;
-                resize: none;
-                width: 250px;
-                height: 5rem;
-                border-radius: 5px;
-                border: 1px solid #8dad8d;
+            .quillWrapper{
+                margin-left:1rem;
             }
+
+            // textarea {
+            //     margin-left: 1rem;
+            //     resize: none;
+            //     width: 250px;
+            //     height: 5rem;
+            //     border-radius: 5px;
+            //     border: 1px solid #8dad8d;
+            // }
         }
 
         .post-category {
-            margin-top: 1rem;
+            margin-top: 4rem;
             select {
                 margin-left: 0.4rem;
-                width: 255px;
+                width: 350px;
+                height: 30px;
                 border-radius: 5px;
-                border: 1px solid #8dad8d;
+                border: 1px solid #ccc;
             }
         }
 
@@ -56,7 +61,6 @@
             }
 
             .add-image {
-                display: none;
                 margin-left: 4.5rem;
                 margin-top: 1rem;
                 width: 150px;

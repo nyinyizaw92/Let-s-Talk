@@ -37,8 +37,13 @@ class PostController extends Controller
     public function create()
     {
         $categories = Category::all();
+        if(Auth::check()){
+            $user = Auth::user()->id;
+        }else{
+            $user = 0;
+        }
 
-        return view('partials.post.create', compact('categories'));
+        return view('partials.post.create', compact(['categories','user']));
     }
 
     /**
@@ -121,17 +126,24 @@ class PostController extends Controller
      */
     public function destroy(Post $post)
     {
-        // $post_id = $post->id;
-        // if (is_array($post_id) || is_object($post_id)) {
-        //     foreach ($post_id as $id) {
-        //         $comment = Comment::where('post_id', $id)->delete();
-        //     }
+      //  dd($post);
+    //     $delete_post = Post::findOrFail($id);
+    //     $post_id = $id;
+        
+    //     if (is_array($post_id) || is_object($post_id)) {
+    //         foreach ($post_id as $id) {
+    //             $comment = Comment::where('post_id', $id)->delete();
+    //         }
 
-        //     foreach ($post_id as $id) {
-        //         $like = UserLikePost::where('post_id', $id)->delete();
-        //     }
-        // }
+    //         foreach ($post_id as $id) {
+    //             $like = UserLikePost::where('post_id', $id)->delete();
+    //         }
+    //     }
+
+    //     // $post_delete = Post::findOrFail($post->id)->delete();
+   
         $post->delete();
-        return redirect('/')->with('errors', 'post delete');
+       
+        return back();
     }
 }

@@ -7,6 +7,11 @@
 require('./bootstrap');
 
 window.Vue = require('vue');
+import Form from './Form';
+import Vue2Editor from "vue2-editor";
+
+window.Form = Form;
+Vue.use(Vue2Editor);
 
 /**
  * The following block of code may be used to automatically register your
@@ -20,7 +25,10 @@ window.Vue = require('vue');
 // files.keys().map(key => Vue.component(key.split('/').pop().split('.')[0], files(key).default))
 
 Vue.component('example-component', require('./components/ExampleComponent.vue').default);
-
+Vue.component('latest-post-display',require('./components/LatestPostDisplay.vue').default);
+Vue.component('user-vote-post',require('./components/UserVotePostComponent.vue').default);
+Vue.component('post-edit-delete',require('./components/PostEditDeleteComponent.vue').default);
+Vue.component('create-post',require('./components/CreatePostComponent.vue').default);
 /**
  * Next, we will create a fresh Vue application instance and attach it to
  * the page. Then, you may begin adding components to this application

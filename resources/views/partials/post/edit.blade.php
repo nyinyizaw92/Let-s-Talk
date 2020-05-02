@@ -36,9 +36,13 @@
         <div class="old-img">
             @if($post->image !== null)
             <img src="/uploads/{{$post->image}}" alt="image" id="edit-image">
+            <div class="cancle-image" onclick="closeimage()">
+                <span class="close">&times;</span>
+            </div>
             @else 
                 <label for="image">
                     <img src="/icons/icons8-upload-100.png" alt="image" id="edit-image">
+                    
                 </label>
            
             @endif
@@ -74,5 +78,13 @@
       reader.readAsDataURL(event.target.files[0]);
     }
     
-    </script>
+</script>
+<script>
+    function closeimage(){
+        var result = confirm('Are you sure');
+        if(result){
+            
+        }
+    }
+</script>
 @endsection
