@@ -29,6 +29,9 @@ Vue.component('latest-post-display',require('./components/LatestPostDisplay.vue'
 Vue.component('user-vote-post',require('./components/UserVotePostComponent.vue').default);
 Vue.component('post-edit-delete',require('./components/PostEditDeleteComponent.vue').default);
 Vue.component('create-post',require('./components/CreatePostComponent.vue').default);
+Vue.component('edit-post',require('./components/EditPost').default);
+Vue.component('popular-post',require('./components/PopularPost').default);
+Vue.component('top-user',require('./components/TopUser').default);
 /**
  * Next, we will create a fresh Vue application instance and attach it to
  * the page. Then, you may begin adding components to this application

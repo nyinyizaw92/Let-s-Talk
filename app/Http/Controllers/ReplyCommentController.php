@@ -14,13 +14,14 @@ class ReplyCommentController extends Controller
 {
     public function store(ReplyCommentRequest $request, UserPostLikeService $postcomment)
     {
-
+       
         $has_reply = Comment::findOrFail($request->comment_id);
         $has_reply->has_reply = true;
         $has_reply->update();
 
         $comment_count_inc_dec = $postcomment->post_comment_inc_dec($request->post_id, "increment");
-        $comment_count_inc_dec->update();
+        //$comment_count_inc_dec->update();
+        $user_comment_count = $postcomment->user_comment_inc_dec($request->user_id, "increment");
 
         $create = $request->except('image');
         $image = $request->file('image');
@@ -74,7 +75,8 @@ class ReplyCommentController extends Controller
     {
         $comment = Comment::findOrFail($replyComment->comment_id);
         $comment_count_inc_dec = $postcomment->post_comment_inc_dec($comment->post_id, "decrement");
-        $comment_count_inc_dec->update();
+
+        $user_comment_count = $postcomment->user_comment_inc_dec($replyComment->user_id, "decrement");
         $replyComment->delete();
         return back();
     }

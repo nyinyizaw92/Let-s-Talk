@@ -38,11 +38,14 @@ class CommentController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(CommentRequest $request)
+    public function store(CommentRequest $request,UserPostLikeService $postcomment)
     {
-       // dd($request->all());
+        
         $create = $request->except('image');
         $image = $request->file('image');
+
+        $user_comment_count = $postcomment->user_comment_inc_dec($request->user_id, "increment");
+
         $comment = new Comment();
 
         if ($image) {
@@ -119,21 +122,21 @@ class CommentController extends Controller
     public function destroy(Comment $comment, UserPostLikeService $postcomment)
     {
         $comment = Comment::findOrFail($comment->id);
+        $user_comment_count = $postcomment->user_comment_inc_dec($comment->user_id, "decrement");
 
         if ($comment->has_reply == 1) {
             $reply_comment = ReplyComment::where('comment_id', $comment->id)->get();
             foreach ($reply_comment as $rpl_cmt) {
                 $rpl_cmt->delete();
                 $comment_count_inc_dec = $postcomment->post_comment_inc_dec($comment->post_id, "decrement");
-                $comment_count_inc_dec->update();
+                $user_comment_count = $postcomment->user_comment_inc_dec($comment->user_id, "decrement");
             }
 
             $comment_count_inc_dec = $postcomment->post_comment_inc_dec($comment->post_id, "decrement");
-            $comment_count_inc_dec->update();
             $comment->delete();
         } elseif ($comment->has_reply == 0) {
             $comment_count_inc_dec = $postcomment->post_comment_inc_dec($comment->post_id, "decrement");
-            $comment_count_inc_dec->update();
+            
             $comment->delete();
         }
 

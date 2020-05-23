@@ -26,8 +26,9 @@ class LatestPostController extends Controller
         }
 
       
-        $popular_posts = Post::where([['like_count', '>=', 2]])->get();
+        $popular_posts = Post::where([['like_count', '>=', 2]])->with('user','category')->get();
         $top_users = User::where([['comment_count', '>=', 2]])->get();
+       
         return view('home', compact(['posts', 'popular_posts', 'top_users', 'post_list', 'get','user']));
     }
 }

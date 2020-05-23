@@ -22,11 +22,9 @@ class UserLikePostController extends Controller
             $post_like = new UserLikePost();
             $post_like->create($request->all());
             $like_count_inc_dec = $postlike->post_inc_dec($request->post_id, "increment");
-            $like_count_inc_dec->update();
         } else {
             $post_like_delete = UserLikePost::findOrFail($post_like_table[0]->id)->delete();
             $like_count_inc_dec = $postlike->post_inc_dec($request->post_id, "decrement");
-            $like_count_inc_dec->update();
         }
         return back();
     }

@@ -17,18 +17,18 @@
                 <label for="category">Categroy</label>
                 <select id="category" class="form-control" v-model="post.category_id">
                     <option value="">Choose Category</option>
-                    <option v-for="category in this.categories" :value="category.id">{{category.title}}</option>
+                    <option :key="category.id" v-for="category in this.categories" :value="category.id">{{category.title}}</option>
                 </select>
             </div>
        
-            <div class="post-image">
+           <!-- <div class="post-image">
                 <label for="image">Images</label>
                 <input type="file" id="image" @change="previewImage">
 
                 <div class="add-image" v-if="imageData.length > 0">
                     <img id="add-image" :src="imageData"/>
                 </div>
-            </div>
+            </div> -->
 
             <div class="post-save">
                 <div class="cancle">
@@ -66,20 +66,20 @@ export default {
             data.append('content',this.post.content);
             data.append('category_id',this.post.category_id);
             
-            if(document.getElementById('image').files[0]){
+            // if(document.getElementById('image').files[0]){
                 
-                data.append('image',document.getElementById('image').files[0]);
+            //     data.append('image',document.getElementById('image').files[0]);
                 
-                var image  = document.getElementById('image').files[0];
-                console.log(image);
-                var reader = new FileReader();
-                reader.onload = function()
-                {
-                var output = document.getElementById('add-image');
-                output.src = reader.result;
-                }
-                reader.readAsDataURL(image);
-            }
+            //     var image  = document.getElementById('image').files[0];
+            //     console.log(image);
+            //     var reader = new FileReader();
+            //     reader.onload = function()
+            //     {
+            //     var output = document.getElementById('add-image');
+            //     output.src = reader.result;
+            //     }
+            //     reader.readAsDataURL(image);
+            // }
 
             axios.post('/post',data)
             .then((response)=>{

@@ -1,6 +1,6 @@
 <template>
     <div>
-        <div v-for="(post,index) in this.posts">
+        <div :key="post.id" v-for="(post,index) in this.posts">
            
            <div class="post">
                <div class="user-profile" v-if="post.user.profile == null">
@@ -14,7 +14,8 @@
                     <a :href="`/post/show/${post.id}`">
                         <div class="post-header">
                             <h3>{{post.title}}</h3>
-                            <p v-html="post.content.substring(0,35) + ' ...'"></p>
+                            <p v-html="post.content.substring(0,50) + ' ...'"  v-if="post.content.length > 50"></p>
+                            <p v-else v-html="post.content"></p>
                             <!-- {{post.content.substr(0, 35)}}..... -->
                         </div>
                     </a>
@@ -22,7 +23,8 @@
                     <div class="post-body">
                         <div class="comment-vote">
                             <div class="comment">
-                                <img src="/icons/icons8-comments-24.png" alt="comment" class="comment-box" @click="addComment = index">
+                                <img src="/icons/icons8-comments-24.png" alt="comment" class="comment-box">
+                                <!-- @click="addComment = index" -->
                                 <span>{{post.comment_count}}</span>
                             </div>
 
@@ -30,7 +32,7 @@
                                 <div v-if="userid !==0">  
                                     <img src="/icons/icons8-heart-outline-24.png" alt="vote" v-if="post.like_count == 0">
 
-                                    <div v-for="like in post.userlike">
+                                    <div :key="like.id" v-for="like in post.userlike">
                                          <img src="/icons/icons8-heart-outline-24-blue.png" alt="vote" v-if="like.user_id == userid"
                                                 style="z-index:1">  
                                             

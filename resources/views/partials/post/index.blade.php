@@ -17,7 +17,8 @@
                     <a href="{{URL::to('post/show/'.$post->id)}}">
                         <div class="post-header">
                             <h3>{{$post->title}}</h3>
-                            <p>{{substr($post->content, 0,35)}}.....</p>
+                            <p>{!!substr($post->content, 0,120)!!}....</p>
+                            <!-- <p>{{substr($post->content, 0,150)}}.....</p> -->
                         </div>
                     </a>
                 </div>

@@ -91,7 +91,8 @@ class PostController extends Controller
      */
     public function edit(Post $post)
     {
-        // dd($post);
+        $post = Post::where('id',$post->id)->with('category')->get();
+        //dd($post);
         $categories = Category::all();
         return view('partials.post.edit', compact(['post', 'categories']));
     }
@@ -105,6 +106,7 @@ class PostController extends Controller
      */
     public function update(PostUpdateRequest $request, Post $post)
     {
+       
         $update = $request->except('image');
         $image = $request->file('image');
         if ($image) {

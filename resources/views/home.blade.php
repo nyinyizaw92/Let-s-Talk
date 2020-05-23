@@ -177,28 +177,7 @@
    <div class="info">
         <h4>Popular Post</h4>
         @if(count($popular_posts) !== 0)
-           
-        <div class="popular-post">
-            @foreach ($popular_posts as $popular_post)
-              
-                    {{-- <div class="user-profile">
-                        @if($popular_post->user->profile == null)
-                        <img src="/icons/icons8-male-user-50.png" alt="profile">
-                        @else 
-                            <img src="/icons/{{$popular_post->user->profile}}" alt="profile">
-                        @endif
-                    </div> --}}
-                    <div class="post-list">
-                        <a href="{{URL::to('post/show/'.$popular_post->id)}}">
-                            <div class="post-header">
-                                <h3>{{$popular_post->title}}</h3>
-                                <p>{{substr($popular_post->content, 0,35)}}.....</p>
-                            </div>
-                        </a>
-                    </div>
-               
-            @endforeach
-        </div>
+            <popular-post :popular_posts="{{$popular_posts}}"></popular-post>
         @else 
                 <p>No popular post</p>
         @endif
@@ -206,28 +185,7 @@
        <div class="top-user">
         <h4>Top User</h4>
         @if(count($top_users) !== 0)
-            
-       
-            @foreach ($top_users as $top_user)
-            <div class="top">
-                    <div class="user-profile">
-                        @if($top_user->profile == null)
-                        <img src="/icons/icons8-male-user-50.png" alt="profile">
-                        @else 
-                            <img src="/profile/{{$top_user->profile}}" alt="profile">
-                        @endif
-                    </div>
-                    <div class="post-list">
-                        <a href="#">
-                            <div class="post-header">
-                                <h3>{{$top_user->name}}</h3>
-
-                            </div>
-                        </a>
-                    </div>
-                </div>
-            @endforeach
-        
+            <top-user :top_users="{{$top_users}}"></top-user>
         @else 
             <p>No Top Users</p>
         @endif

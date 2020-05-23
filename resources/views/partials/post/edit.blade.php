@@ -1,8 +1,9 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="post-edit">
-    <form action="{{route('post.update',$post->id)}}" method="POST" enctype="multipart/form-data">
+<edit-post :posts ="{{$post}}" :categories = "{{$categories}}"></edit-post>
+<!-- <div class="post-edit">
+    <form action="{{route('post.update',$post[0]->id)}}" method="POST" enctype="multipart/form-data">
         @csrf
         @method('PUT')   
         <div class="post-title">
@@ -10,7 +11,7 @@
             <input type="text" 
             name="title" 
             id="title" 
-            value="{{$post->title}}"/>
+            value="{{$post[0]->title}}"/>
         </div>
 
         <div class="post-content">
@@ -19,14 +20,14 @@
             <textarea 
             name="content" 
             id="content" cols="30" rows="10" 
-            >{{$post->content}}</textarea>
+            >{{$post[0]->content}}</textarea>
         </div>
 
         <div class="old-category">
             <label for="category_id">Category</label><br/>
 
             <select name="category_id" id="category_id" required>
-                <option value="{{$post->category->id}}">{{$post->category->title}}</option>
+                <option value="{{$post[0]->category->id}}">{{$post[0]->category->title}}</option>
             @foreach($categories as $category)
                 <option value="{{$category->id}}">{{$category->title}}</option>
             @endforeach
@@ -34,8 +35,8 @@
         </div>
 
         <div class="old-img">
-            @if($post->image !== null)
-            <img src="/uploads/{{$post->image}}" alt="image" id="edit-image">
+            @if($post[0]->image !== null)
+            <img src="/uploads/{{$post[0]->image}}" alt="image" id="edit-image">
             <div class="cancle-image" onclick="closeimage()">
                 <span class="close">&times;</span>
             </div>
@@ -63,10 +64,10 @@
             </div> 
         </div>
     </form>
-</div>
+</div> -->
 @endsection
 @section('scripts') 
-<script>
+<!-- <script>
     function preview_image(event) 
      {
       var reader = new FileReader();
@@ -86,5 +87,5 @@
             
         }
     }
-</script>
+</script> -->
 @endsection
