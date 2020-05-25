@@ -14,7 +14,7 @@ class ReplyCommentController extends Controller
 {
     public function store(ReplyCommentRequest $request, UserPostLikeService $postcomment)
     {
-       
+       //dd($request->all());
         $has_reply = Comment::findOrFail($request->comment_id);
         $has_reply->has_reply = true;
         $has_reply->update();
@@ -24,6 +24,7 @@ class ReplyCommentController extends Controller
         $user_comment_count = $postcomment->user_comment_inc_dec($request->user_id, "increment");
 
         $create = $request->except('image');
+        
         $image = $request->file('image');
 
         $reply_comment = new ReplyComment();

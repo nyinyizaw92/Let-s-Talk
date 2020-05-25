@@ -2,6 +2,7 @@
 
 @section('content')
 @include('partials.navbar.secondnav')
+<post-detail :postdetail="{{$post_detail}}" :user = {{$user}} :comments="{{$comments}}"></post-detail>
 <div class="post-detail">
     <div class="post">
         {{-- start post detail --}}
@@ -90,12 +91,12 @@
                             <span>{{$comment->user->name}}</span>
                         </div>
                         <div class="comment-answer">
-                        <p> {{$comment->answer}}</p>
-                        @if($comment->image !== null)
-                            <div class="comment-image">
-                                <img src="/comments/{{$comment->image}}" alt="image" />
-                            </div>
-                        @endif
+                            <p> {{$comment->answer}}</p>
+                            @if($comment->image !== null)
+                                <div class="comment-image">
+                                    <img src="/comments/{{$comment->image}}" alt="image" />
+                                </div>
+                            @endif
                         </div>
                         {{-- end comment list --}}
 
@@ -232,7 +233,7 @@
                                @csrf
                                <input type="hidden" name="user_id" @if(Auth::check()) value="{{Auth::user()->id}}" @endif />
                                <input type="hidden" name="comment_id" value="{{$comment->id}}">
-                               <input type="hidden" name="has_reply" value="2">
+                               <!-- <input type="hidden" name="has_reply" value="2"> -->
                                <input type="hidden" name="post_id" value="{{$post_detail->id}}" />
                                <textarea name="answer" id="answer" cols="30" rows="2"
                                placeholder="comment...."></textarea>

@@ -32,6 +32,8 @@ Vue.component('create-post',require('./components/CreatePostComponent.vue').defa
 Vue.component('edit-post',require('./components/EditPost').default);
 Vue.component('popular-post',require('./components/PopularPost').default);
 Vue.component('top-user',require('./components/TopUser').default);
+Vue.component('post-detail',require('./components/PostDetail').default);
+Vue.component('show-comment',require('./components/ShowComment').default);
 /**
  * Next, we will create a fresh Vue application instance and attach it to
  * the page. Then, you may begin adding components to this application

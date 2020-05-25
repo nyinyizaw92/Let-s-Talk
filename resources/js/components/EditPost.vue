@@ -2,7 +2,7 @@
     <div class="post-edit">
          <h2>Edit Post</h2>
 
-        <form @submit.prevent="editPost(post[0].id)">
+        <form @submit.prevent="editPost(post.id)">
             <div class="post-title">
                 <label for="title">Title</label>
                 <input type="text" v-model="editpost.title" id="title">
@@ -16,7 +16,7 @@
             <div class="post-category">
                 <label for="category">Categroy</label>
                 <select id="category" class="form-control" v-model="editpost.category_id">
-                    <option :value="editpost.category_id">{{post[0].category.title}}</option>
+                    <option :value="editpost.category_id">{{post.category.title}}</option>
                     <option :key="category.id" v-for="category in this.categories" :value="category.id">{{category.title}}</option>
                 </select>
             </div>
@@ -50,9 +50,9 @@ export default {
             category : this.categories,
 
             editpost : {
-                title : this.posts[0].title,
-                content : this.posts[0].content,
-                category_id : this.posts[0].category.id, 
+                title : this.posts.title,
+                content : this.posts.content,
+                category_id : this.posts.category.id, 
             }
         }
     },

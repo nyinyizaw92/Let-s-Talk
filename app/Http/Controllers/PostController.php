@@ -76,11 +76,19 @@ class PostController extends Controller
      */
     public function show($id)
     {
-        $post_detail = Post::find($id);
-        $comments = Comment::where('post_id', $id)->with('user')->get();
+        
+        $post_detail = Post::where('id',$id)->with('user','category','userlike')->first();
+        //dd($post_detail);
+        $comments = Comment::where('post_id', $id)->with('user','replycomment')->get();
+       // dd($comments);
+        if(Auth::check()){
+            $user = Auth::user()->id;
+        }else{
+            $user = 0;
+        }
 
 
-        return view('partials.post.show', compact(['post_detail', 'comments']));
+        return view('partials.post.show', compact(['post_detail', 'comments','user']));
     }
 
     /**
@@ -91,7 +99,7 @@ class PostController extends Controller
      */
     public function edit(Post $post)
     {
-        $post = Post::where('id',$post->id)->with('category')->get();
+        $post = Post::where('id',$post->id)->with('category')->first();
         //dd($post);
         $categories = Category::all();
         return view('partials.post.edit', compact(['post', 'categories']));

@@ -25,6 +25,7 @@ class ReplyCommentRequest extends FormRequest
     {
         return [
             "user_id" => "required",
+            "post_id" => "required",
             'comment_id' => 'required',
             "answer" => "required",
             "image" => "file",
