@@ -195,16 +195,17 @@
         }
     }
     .about-user {
-        margin: 5px;
+        margin: 0px 5px 0px 5px;
         display: grid;
+        border-top: 1px solid #cccccc;
         grid-template-columns: 70% 30%;
 
         .user-post {
             background: white;
-            margin-right: 5px;
-            height: max-content;
+            margin-right: 2px;
+            height: 74vh;
             h3 {
-                margin: 1rem 0 0 1rem;
+                margin: 10px 0 0 1rem;
             }
 
             .created-post {
@@ -212,7 +213,9 @@
                 grid-template-columns: 80% 20%;
                 // background: #d5dcdc;
                 padding: 0.5rem 0.5rem 0.5rem 0;
-                border-bottom: 2px solid #b19fb1;
+                border-bottom: 2px solid #ccc;
+                height: 50px;
+                margin-top: 15px;
 
                 .left {
                     margin-left: 1rem;
@@ -274,15 +277,18 @@
 
         .your-save-post {
             background: white;
+            height:74vh;
 
             h3 {
-                margin: 0 0 0 0.5rem;
+                margin: 10px 0 0 0.5rem;
             }
             .save-post {
                 padding: 0.5rem;
-                border-bottom: 1px solid black;
+                border-bottom: 1px solid #ccc;
                 display: flex;
                 flex-direction: row;
+                height: 50px;
+                margin-top: 15px;
 
                 .user-profile {
                     width: 35px;

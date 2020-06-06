@@ -38,4 +38,14 @@ class UserPostLikeService
         }
         return $user_comment;
     }
+
+    function user_save_post($id,$text){
+        $save_post = User::findOrFail($id);
+        if ($text == "increment") {
+            $save_post->increment('save_post');
+        } elseif ($text == "decrement") {
+            $save_post->decrement('save_post');
+        }
+        return $save_post;
+    }
 }

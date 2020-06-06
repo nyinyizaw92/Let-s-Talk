@@ -21,6 +21,7 @@ Auth::routes();
 
 Route::resource('/user', 'UserController')->middleware('auth');
 Route::resource('/post-like', 'UserLikePostController')->middleware('auth');
+Route::resource('/save-post','UserSavePostController')->middleware('auth');
 
 Route::get('/', 'LatestPostController@index');
 Route::resource('/post', 'PostController')->middleware('auth')->except(['show', 'index']);

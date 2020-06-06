@@ -4,7 +4,7 @@
             <div class="answer">
                 <div class="comment-user">
                     <img :src="`/profile/${cmt.user.profile}`" alt="user_profile" v-if="cmt.user.profile !== null"/>
-                    <img src="/icons/icons8-male-user-50.png" alt="user_profile" />
+                    <img src="/icons/icons8-male-user-50.png" alt="user_profile" v-else/>
                     <span>{{cmt.user.name}}</span>
                 </div>
 
@@ -18,7 +18,7 @@
                         </div>
                     
                         <div class="edit" v-if="authid == cmt.user_id">
-                        <button class="edit-btn">Edit</button>
+                            <button class="edit-btn" @click="commentUpdate = index">Edit</button>
                         </div>
 
                         <div class="delete"  v-if="authid == cmt.user_id">
@@ -30,7 +30,12 @@
                     </div>
                 </div>
 
+                <div class="update-form" v-show="commentUpdate == index">
+                    <UpdateComment :ans="cmt.answer" :cmtid="cmt.id" text="commentUpd"/>
+                </div>
+
                 <div class="reply-box" v-show="replyCmt == index">
+                    <ReplyCmt :commentreply="cmt.replycomment" :userid="authid"/>
                     <form @submit.prevent="addReplyComment(cmt.id,cmt.post_id,authid)">
                         <vue-editor v-model="replycomment.answer" id="answer" />
                         <input type="reset" value="cancle" @click="canclement()">
@@ -42,6 +47,8 @@
     </div>
 </template>
 <script>
+import ReplyCmt from './ReplyComment';
+import UpdateComment from './CommentUpdate'
 export default {
     props:['postcomment','auth'],
     data(){
@@ -49,10 +56,15 @@ export default {
             comment: this.postcomment,
             authid : this.auth,
             replyCmt : -1,
+            commentUpdate : -1,
             replycomment:{
                 answer:'',
             }
         }
+    },
+    components:{
+        ReplyCmt,
+        UpdateComment
     },
     methods:{
         delCmt:function(id){
@@ -85,7 +97,7 @@ export default {
                window.location.reload();
             })
             .catch(error=>console.log(error));
-        }
+        },
     }
 }
 </script>

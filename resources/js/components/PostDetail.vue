@@ -2,9 +2,9 @@
     <div class="post-detail">
         <div class="post">
             <div class="user-info">    
-                <div class="profile">
-                     <img src="/icons/icons8-male-user-50.png" alt="profile" v-if="post_detail.user.profile == null">
-                     <img :src="`/profile/${post_detail.user.profile}`" alt="profile" v-else >
+                <div class="photo">
+                     <img src="/icons/icons8-male-user-50.png" alt="up" v-if="post_detail.user.profile == null">
+                     <img :src="`/profile/${post_detail.user.profile}`" alt="up" v-else>
                 </div>
                 <div class="name">
                     <p><i>{{post_detail.user.name}}</i></p>
@@ -14,18 +14,23 @@
                 <div class="like-comment">
                     <div class="like">
                         <div v-if="userid !==0">  
-                            <img src="/icons/icons8-heart-outline-24.png" alt="vote" v-if="post_detail.like_count == 0">
+                            <img src="/icons/icons8-heart-outline-24.png" alt="vote" 
+                            v-if="post_detail.like_count == 0" 
+                            @click="userpostlike(post_detail.id,userid)">
 
-                            <div :key="like.id" v-for="like in post_detail.userlike">
-                                <img src="/icons/icons8-heart-outline-24-blue.png" alt="vote" v-if="like.user_id == userid"
-                                    style="z-index:1">  
-                                    
-                                <img src="/icons/icons8-heart-outline-24.png" alt="vote" v-else> 
+                            <div :key="like.id" v-for="like in post_detail.userlike" 
+                                @click="userpostlike(post_detail.id,userid)"
+                                v-else>
+                                <img src="/icons/icons8-heart-outline-24-blue.png" 
+                                alt="vote" v-if="like.user_id == userid"
+                                style="z-index:1;
+                                ">  
+                                
+                                 <img src="/icons/icons8-heart-outline-24.png" alt="vote"
+                                  v-else />
+                               
                             </div>
-
-                            <form @submit.prevent="userpostlike(post_detail.id,userid)">
-                                <input type="submit">
-                            </form>
+                        
                             
                             <p>{{post_detail.like_count}}</p>
                         </div>
@@ -37,6 +42,11 @@
                     <div class="comment">
                         <img src="/icons/icons8-comments-24.png" alt="comment">
                         <p >{{post_detail.comment_count}}</p>
+                    </div>
+                    <div class="save"  @click="savepost(post_detail.id,userid)">
+                        <img src="/icons/icons8-bookmark-30-color.png" alt="save" v-if="saveuser">
+                        <img src="/icons/icons8-bookmark-30.png" alt="save" v-else>
+                        
                     </div>
                 </div>
                 <div class="detail-post">
@@ -52,20 +62,22 @@
                     <input type="submit" value="submit">
                 </form>
             </div>
-
-            
         </div>
+        <OtherQuestion :otherpost="post_detail"/>
     </div>
 </template>
 <script>
+import OtherQuestion from './OtherQuestion'
 export default {
     props:['postdetail','user','comments'],
-
+    components:{
+        OtherQuestion
+    },
     data(){
         return{
             post_detail : this.postdetail,
             userid : this.user,
-            
+            saveuser : '',
             comment : {
                 answer:'',
             }
@@ -101,9 +113,39 @@ export default {
                window.location.reload();
             })
             .catch(error=>this.form.errors.record(error.response.data));
-        }
+        },
 
-        
+        savepost:function(postid,userid){
+            if(userid === 0){
+                window.location.href="/login";
+            }else{
+                let data = new FormData();
+                data.append('user_id',userid);
+                data.append('post_id',postid);
+                 axios.post('/save-post/',data)
+                .then((response) =>window.location.reload())
+                .catch((error) => console.log(error))
+            }
+           
+        }
     },
+
+    mounted:function(){
+        
+        if(this.userid !== 0 ){
+             axios.get('/save-post/'+this.post_detail.id)
+            .then((response) => 
+                response.data.forEach( a => {
+                        if(a.user_id == this.userid){
+                            this.saveuser = a.user_id
+                        }
+                    }
+                )
+            )
+            .catch((error) => console.log(error));
+        }
+    }
+
+
 }
 </script>

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Post;
 use App\UserLikePost;
+use App\UserSavePost;
 use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -19,7 +20,7 @@ class UserController extends Controller
     {
         $user = Auth::user();
         $user_posts = Post::where('user_id', $user->id)->with(['category', 'comment', 'userlike'])->get();
-        $user_like_posts = UserLikePost::where('user_id', $user->id)
+        $user_like_posts = UserSavePost::where('user_id', $user->id)
             ->with(['post'])->get();
 
         return view('partials.user.index', compact(['user', 'user_posts', 'user_like_posts']));
@@ -43,7 +44,7 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        //dd($request->all());
     }
 
     /**
@@ -54,18 +55,18 @@ class UserController extends Controller
      */
     public function show($id)
     {
-        //
+       
     }
 
     /**
-     * Show the form for editing the specified resource.
+     * Show the form for editing the specified rerequestsource.
      *
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
     public function edit($id)
     {
-        //
+        //dd($request->all());
     }
 
     /**

@@ -34,6 +34,9 @@ Vue.component('popular-post',require('./components/PopularPost').default);
 Vue.component('top-user',require('./components/TopUser').default);
 Vue.component('post-detail',require('./components/PostDetail').default);
 Vue.component('show-comment',require('./components/ShowComment').default);
+Vue.component('reply-comment',require('./components/ReplyComment').default);
+Vue.component('update-comment',require('./components/CommentUpdate').default);
+Vue.component('other-question',require('./components/OtherQuestion').default);
 /**
  * Next, we will create a fresh Vue application instance and attach it to
  * the page. Then, you may begin adding components to this application

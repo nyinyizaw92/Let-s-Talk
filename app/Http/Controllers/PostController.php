@@ -13,6 +13,7 @@ use App\Http\Resources\PostResourceCollection;
 use App\UserLikePost;
 use Faker\Provider\ar_JO\Person;
 use Illuminate\Support\Facades\Auth;
+use App\ReplyComment;
 
 
 class PostController extends Controller
@@ -80,7 +81,14 @@ class PostController extends Controller
         $post_detail = Post::where('id',$id)->with('user','category','userlike')->first();
         //dd($post_detail);
         $comments = Comment::where('post_id', $id)->with('user','replycomment')->get();
-       // dd($comments);
+        
+        $reply = [];
+        foreach($comments as $cmt){
+            $rep = ReplyComment::where('comment_id',$cmt->id)->with('user')->get();
+            array_push($reply,$rep);
+        }
+
+        //dd($reply);
         if(Auth::check()){
             $user = Auth::user()->id;
         }else{

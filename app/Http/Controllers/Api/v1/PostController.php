@@ -14,4 +14,9 @@ class PostController extends Controller
     {
         return new PostResourceCollection(Post::paginate(10));
     }
+
+    public function show($id){
+        $other_posts = Post::where('category_id',$id)->get();
+        return json_decode($other_posts);
+    }
 }

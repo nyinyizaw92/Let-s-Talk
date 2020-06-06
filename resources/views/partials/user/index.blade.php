@@ -19,13 +19,13 @@
                         </li>
                      
                         <li class="nav-item">   
-                            <a href="{{ url('/post') }}">All Posts</a>
+                            <a href="{{ url('/post/index') }}">All Posts</a>
                         </li>
                     </ul>
                 </div>
             </div>
         </nav>
-        {{-- <h2>Welcome {{$user->name}}</h2> --}}
+        
         <div class="profile">
             <div class="image">
                 @if($user->profile == null)
@@ -40,7 +40,7 @@
             </div>
             <div class="total-post">
                 <p>Total Posts : <span>{{count($user->post)}}</span></p>
-                <p>Save Posts : <span>{{count($user_like_posts)}}</span></p>
+                <p>Save Posts : <span>{{$user->save_post}}</span></p>
             </div>
            
         </div>
@@ -90,7 +90,11 @@
                         <div class="left">
                             <a href="{{URL::to('post/show/'.$user_post->id)}}">
                                 <h4>{{$user_post->title}} <span>{{$user_post->category->title}}</span></h4>
-                                <p>{{substr($user_post->content, 0,35)}}.....</p>
+                                @if(strlen($user_post->content) > 50)
+                                    <p>{!!substr($user_post->content, 0,120)!!}....</p>
+                                @else 
+                                    <p>{!! $user_post->content !!}</p>
+                                @endif
                             </a>
                         </div>
                         <div class="right">
@@ -108,9 +112,10 @@
                     </div>
                 @endforeach
             </div>
+
             <div class="your-save-post">
                 <h3>Your Save Post</h3>
-             
+
                 @foreach ($user_like_posts as $user_like_post)
               
                     <div class="save-post">
@@ -125,7 +130,11 @@
                             <a href="{{URL::to('post/show/'.$user_like_post->post->id)}}">
                                 <div class="post-header">
                                     <h3>{{$user_like_post->post->title}}</h3>
-                                    <p>{{substr($user_like_post->post->content, 0,35)}}.....</p>
+                                    @if(strlen($user_like_post->post->content) > 50)
+                                    <p>{!!substr($user_like_post->post->content, 0,120)!!}....</p>
+                                    @else 
+                                        <p>{!! $user_like_post->post->content !!}</p>
+                                    @endif
                                 </div>
                             </a>
                         </div>
